@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MasCom — The Restoration Architecture. Universal AI governance for real-world roles. Bring your own AI, your own cloud, run your own MasComHQ. Built from the foundation up.">
+  <meta name="robots" content="index, follow">
+  <title>MasCom — The Restoration Architecture</title>
+  <style>
+    :root {
+      --bg-deep: #0e0d0a;
+      --bg-paper: #161410;
+      --bg-card: #1f1c16;
+      --bg-card-hover: #28241c;
+      --ink: #e9e4d4;
+      --ink-muted: #a89f88;
+      --ink-dim: #75705f;
+      --accent-gold: #c9a86a;
+      --accent-gold-bright: #d8b97a;
+      --accent-rust: #a64b2a;
+      --accent-deep-green: #4a6b4d;
+      --rule: #2a2620;
+      --serif: 'Cormorant Garamond', 'Crimson Pro', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg-deep); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 50; background: rgba(14, 13, 10, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; }
+    .brand { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--accent-gold); letter-spacing: 0.05em; }
+    .brand .dot { color: var(--accent-rust); }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    nav a { color: var(--ink-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.15s; }
+    nav a:hover { color: var(--accent-gold); }
+
+    /* HERO */
+    .hero { padding: 6rem 0 5rem; border-bottom: 1px solid var(--rule); position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; top: 0; right: -10%; width: 60%; height: 100%; background: radial-gradient(ellipse at 70% 30%, rgba(201, 168, 106, 0.08) 0%, transparent 60%); pointer-events: none; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.05; font-weight: 500; margin-bottom: 1.25rem; letter-spacing: -0.01em; position: relative; }
+    .hero h1 em { color: var(--accent-gold); font-style: italic; }
+    .hero .sub { font-family: var(--mono); font-size: 0.85rem; color: var(--accent-rust); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; position: relative; }
+    .hero .lede { font-size: 1.25rem; color: var(--ink-muted); max-width: 720px; margin-bottom: 2rem; position: relative; }
+    .hero .ctas { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; }
+
+    .btn { display: inline-block; padding: 0.9rem 1.6rem; font-size: 0.95rem; font-weight: 500; text-decoration: none; border-radius: 2px; transition: all 0.15s; cursor: pointer; border: none; font-family: inherit; }
+    .btn-primary { background: var(--accent-gold); color: var(--bg-deep); }
+    .btn-primary:hover { background: var(--accent-gold-bright); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+    .btn-ghost:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+    section { padding: 5rem 0; border-bottom: 1px solid var(--rule); }
+    section h2 { font-family: var(--serif); font-size: clamp(1.85rem, 3.5vw, 2.5rem); font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.005em; }
+    section h2 em { color: var(--accent-gold); font-style: italic; }
+    section .lede { color: var(--ink-muted); max-width: 720px; margin-bottom: 3rem; font-size: 1.1rem; }
+    section .section-tag { font-family: var(--mono); font-size: 0.75rem; color: var(--accent-rust); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+
+    /* PROOF METRICS */
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+    .metric { background: var(--bg-card); border: 1px solid var(--rule); padding: 2rem 1.5rem; text-align: center; border-radius: 4px; transition: border-color 0.2s; }
+    .metric:hover { border-color: var(--accent-gold); }
+    .metric .num { font-family: var(--serif); font-size: 3.25rem; font-weight: 500; color: var(--accent-gold); line-height: 1; }
+    .metric .label { color: var(--ink-muted); font-size: 0.85rem; margin-top: 0.5rem; letter-spacing: 0.04em; }
+
+    /* TIMELINE WALKTHROUGH (clickable) */
+    .timeline-walkthrough { background: var(--bg-paper); border: 1px solid var(--rule); border-radius: 4px; padding: 2.5rem; margin-top: 2rem; position: relative; }
+    .timeline-walkthrough .compare { display: flex; gap: 2rem; margin-bottom: 2rem; align-items: baseline; flex-wrap: wrap; }
+    .timeline-walkthrough .compare .before { color: var(--ink-dim); font-size: 1.1rem; text-decoration: line-through; }
+    .timeline-walkthrough .compare .arrow { color: var(--accent-rust); font-size: 1.5rem; font-family: var(--serif); }
+    .timeline-walkthrough .compare .after { color: var(--accent-gold); font-size: 1.5rem; font-family: var(--serif); font-weight: 500; }
+    .steps { display: flex; flex-direction: column; gap: 0.5rem; }
+    .step { display: flex; gap: 1rem; padding: 1rem; background: var(--bg-deep); border: 1px solid var(--rule); border-radius: 4px; cursor: pointer; transition: all 0.2s; align-items: flex-start; }
+    .step:hover { border-color: var(--accent-gold); background: var(--bg-card-hover); }
+    .step.active { border-color: var(--accent-gold); background: var(--bg-card-hover); }
+    .step .num { font-family: var(--mono); font-size: 0.8rem; color: var(--accent-gold); padding-top: 0.15rem; min-width: 2rem; }
+    .step .body { flex: 1; }
+    .step .what { font-weight: 500; margin-bottom: 0.2rem; }
+    .step .who { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-dim); letter-spacing: 0.05em; }
+    .step .detail { color: var(--ink-muted); font-size: 0.92rem; margin-top: 0.6rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, margin-top 0.3s ease; }
+    .step.active .detail { max-height: 200px; margin-top: 0.6rem; }
+    .step .toggle { color: var(--ink-dim); font-family: var(--mono); font-size: 0.85rem; align-self: center; }
+
+    /* PILLAR GRID */
+    .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .pillar { background: var(--bg-card); border: 1px solid var(--rule); padding: 1.5rem 1.25rem; border-radius: 4px; cursor: pointer; transition: all 0.2s; text-align: center; }
+    .pillar:hover { border-color: var(--accent-gold); transform: translateY(-2px); background: var(--bg-card-hover); }
+    .pillar .icon { font-size: 1.6rem; margin-bottom: 0.5rem; color: var(--accent-gold); font-family: var(--serif); }
+    .pillar .name { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .pillar .blurb { color: var(--ink-muted); font-size: 0.85rem; line-height: 1.4; }
+
+    /* ROLES */
+    .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .role { background: var(--bg-card); border: 1px solid var(--rule); padding: 1.75rem 1.5rem; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+    .role:hover { border-color: var(--accent-gold); transform: translateY(-2px); }
+    .role .code { font-family: var(--mono); font-size: 0.85rem; color: var(--accent-rust); letter-spacing: 0.1em; }
+    .role .title { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; margin: 0.25rem 0 0.5rem; }
+    .role .level { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .role .desc { color: var(--ink-muted); font-size: 0.92rem; }
+
+    /* SAMPLE MASCOMS */
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--rule); padding: 2rem 1.75rem; border-radius: 4px; transition: all 0.2s; cursor: pointer; }
+    .card:hover { border-color: var(--accent-gold); transform: translateY(-2px); background: var(--bg-card-hover); }
+    .card .role-tag { display: inline-block; font-family: var(--mono); font-size: 0.75rem; color: var(--accent-rust); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .card h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; margin-bottom: 0.75rem; }
+    .card p { color: var(--ink-muted); font-size: 0.95rem; }
+
+    /* QUOTE / RESTORATION STORY */
+    .restoration-story { background: linear-gradient(180deg, var(--bg-paper) 0%, var(--bg-deep) 100%); }
+    .restoration-story .wrap { max-width: 820px; }
+    .quote-block { font-family: var(--serif); font-size: 1.5rem; line-height: 1.45; color: var(--ink); padding: 2rem 0; }
+    .quote-block .attribution { color: var(--ink-muted); font-style: normal; font-size: 0.9rem; font-family: var(--sans); margin-top: 1rem; display: block; }
+    .triad { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin: 2.5rem 0; }
+    .triad-item { text-align: center; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 4px; }
+    .triad-item .label { font-family: var(--mono); font-size: 0.8rem; color: var(--accent-rust); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .triad-item .body { color: var(--ink-muted); font-size: 0.95rem; }
+    .triad-item .body em { color: var(--accent-gold); font-style: italic; }
+
+    /* INFRASTRUCTURE SVG */
+    .infra-diagram { background: var(--bg-paper); border: 1px solid var(--rule); border-radius: 4px; padding: 2rem; margin-top: 2rem; }
+    .infra-diagram svg { width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(180deg, var(--bg-paper) 0%, var(--bg-deep) 100%); text-align: center; }
+    .cta-form { display: flex; gap: 0.75rem; max-width: 480px; margin: 2rem auto 0; flex-wrap: wrap; justify-content: center; }
+    .cta-form input { flex: 1; min-width: 220px; padding: 0.9rem 1.2rem; background: var(--bg-card); border: 1px solid var(--rule); color: var(--ink); font-family: inherit; font-size: 0.95rem; border-radius: 2px; }
+    .cta-form input:focus { outline: none; border-color: var(--accent-gold); }
+    .cta-note { color: var(--ink-muted); font-size: 0.85rem; margin-top: 1rem; }
+
+    /* FOOTER */
+    footer { padding: 3rem 0 4rem; color: var(--ink-muted); font-size: 0.9rem; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+    footer .col h4 { font-family: var(--serif); color: var(--ink); font-size: 1.05rem; margin-bottom: 0.75rem; font-weight: 500; }
+    footer .col ul { list-style: none; }
+    footer .col li { margin-bottom: 0.4rem; }
+    footer .col a { color: var(--ink-muted); text-decoration: none; }
+    footer .col a:hover { color: var(--accent-gold); }
+    .legal { width: 100%; padding-top: 2rem; margin-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <div class="brand">MasCom<span class="dot">·</span></div>
+      <ul>
+        <li><a href="#proof">Proof</a></li>
+        <li><a href="#flow">How it flows</a></li>
+        <li><a href="#pillars">Architecture</a></li>
+        <li><a href="#roles">The team</a></li>
+        <li><a href="#examples">Roles</a></li>
+        <li><a href="#story">Why</a></li>
+        <li><a href="#join">Join</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="sub">The Restoration Architecture</div>
+      <h1>An AI <em>operating system</em> for real life — built from the foundation up.</h1>
+      <p class="lede">MasCom is the architecture under your AI conversations. Bring your own AI — Claude, GPT, Gemini, others. Bring your own cloud — Drive, OneDrive, Dropbox. Run your own role: real estate operator, detective, tax preparer, illustrator, anyone with a job that matters. The structure adapts to your work; the governance stays the same.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#join">Join the proof of concept</a>
+        <a class="btn btn-ghost" href="#flow">See it in action</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="proof">
+    <div class="wrap">
+      <div class="section-tag">Proof — already running</div>
+      <h2>Built and running today, by one person, on a single laptop.</h2>
+      <p class="lede">The first MasCom is operating a real wedding venue (Main Street Manor in Crittenden, KY) and a real-estate holding company (26 Cents LLC) with four properties. Below are the actual numbers from one of the workflows that runs on it.</p>
+
+      <div class="metrics">
+        <div class="metric"><div class="num">83<span style="font-size: 1.5rem;">%</span></div><div class="label">Time saved per inquiry response</div></div>
+        <div class="metric"><div class="num">22</div><div class="label">Custom AI skills wired into the system</div></div>
+        <div class="metric"><div class="num">8</div><div class="label">Canonical SOP folders structuring the work</div></div>
+        <div class="metric"><div class="num">5</div><div class="label">Tier role cascade governing every task</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <div class="section-tag">A real flow — venue inquiry, end to end</div>
+      <h2>From <em>"How much for an October Saturday?"</em> to a sent reply, in 6 minutes.</h2>
+      <p class="lede">Click any step to see what's happening underneath. Before MasCom, this took 35 minutes of manual reading, looking up calendars, drafting, checking. Now it's six.</p>
+
+      <div class="timeline-walkthrough">
+        <div class="compare">
+          <span class="before">35 minutes manual</span>
+          <span class="arrow">→</span>
+          <span class="after">6 minutes total · 4 min draft + 2 min Paul reviews/sends</span>
+        </div>
+
+        <div class="steps">
+          <div class="step" data-step="1">
+            <div class="num">01</div>
+            <div class="body">
+              <div class="what">Inquiry arrives at the dedicated venue inbox</div>
+              <div class="who">Producer · email-to-drive skill</div>
+              <div class="detail">A bride emails the venue. Within seconds the email is captured, parsed, and filed into the right folder in cloud storage — tagged by date and source. No manual filing, no inbox sprawl. The system knows this is a venue inquiry because of who it was sent to and the keywords inside.</div>
+            </div>
+            <div class="toggle">+</div>
+          </div>
+
+          <div class="step" data-step="2">
+            <div class="num">02</div>
+            <div class="body">
+              <div class="what">Triage decides what kind of work this is</div>
+              <div class="who">Producer · Intake (the front-door AI)</div>
+              <div class="detail">The lightest, fastest AI triages the request: what is this, what does it need, who should handle it. It drafts a Session Brief — a one-page summary that gets passed up the chain — and identifies which custom skill should fire next.</div>
+            </div>
+            <div class="toggle">+</div>
+          </div>
+
+          <div class="step" data-step="3">
+            <div class="num">03</div>
+            <div class="body">
+              <div class="what">The right specialist skill activates</div>
+              <div class="who">Producer · venue-inquiry skill</div>
+              <div class="detail">The skill pulls in the venue's current pricing, availability calendar, and FAQ responses. It composes a warm, on-brand response — not a template, but a message that addresses her specific dates, mentions tour times, and includes a booking link. This is where the work happens.</div>
+            </div>
+            <div class="toggle">+</div>
+          </div>
+
+          <div class="step" data-step="4">
+            <div class="num">04</div>
+            <div class="body">
+              <div class="what">Quality check — nothing ships without it</div>
+              <div class="who">Gate · Quality Auditor (QAC)</div>
+              <div class="detail">Grammar. Tone. Brand voice. Link accuracy. PII scan to confirm no sensitive data leaked. If anything fails, the draft goes back to be rewritten. No exceptions, no shortcuts. This gate is what makes it trustworthy enough to put in front of customers.</div>
+            </div>
+            <div class="toggle">+</div>
+          </div>
+
+          <div class="step" data-step="5">
+            <div class="num">05</div>
+            <div class="body">
+              <div class="what">Draft lands in your inbox for sign-off</div>
+              <div class="who">Producer · Junior (the filer)</div>
+              <div class="detail">The draft is created as a saved email draft. The human (Paul) reviews, makes any personal touches, hits send. Two minutes of his time. Meanwhile, a 30-day follow-up is automatically scheduled — if she tours, she gets a check-in. If she books, a review request is queued.</div>
+            </div>
+            <div class="toggle">+</div>
+          </div>
+
+          <div class="step" data-step="6">
+            <div class="num">06</div>
+            <div class="body">
+              <div class="what">Session state is logged to the ledger</div>
+              <div class="who">Producer · Junior · append-only history</div>
+              <div class="detail">Every action — who triaged, what skill fired, what was approved, what shipped — is appended to the session-state log. Append-only. Cannot be rewritten. If something goes wrong six months from now, the audit trail is right there.</div>
+            </div>
+            <div class="toggle">+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pillars">
+    <div class="wrap">
+      <div class="section-tag">The Architecture — six pillars</div>
+      <h2>What MasCom <em>is</em>, structurally.</h2>
+      <p class="lede">Every MasCom — yours, mine, anyone's — is built on the same six load-bearing pillars. Click any pillar to see what it covers.</p>
+
+      <div class="pillars">
+        <div class="pillar" data-pillar="hierarchy">
+          <div class="icon">⌬</div>
+          <div class="name">Hierarchy</div>
+          <div class="blurb">Org & entity structure. Who reports to whom. Which entity owns what.</div>
+        </div>
+        <div class="pillar" data-pillar="flow">
+          <div class="icon">↬</div>
+          <div class="name">Flow</div>
+          <div class="blurb">Role cascade & handoff path. How work travels from intake to delivery.</div>
+        </div>
+        <div class="pillar" data-pillar="timeline">
+          <div class="icon">⌖</div>
+          <div class="name">Timeline</div>
+          <div class="blurb">Build history. What was added when, and why. Decisions trace forward.</div>
+        </div>
+        <div class="pillar" data-pillar="documents">
+          <div class="icon">⎙</div>
+          <div class="name">Documents</div>
+          <div class="blurb">SOP taxonomy. Charters, blueprints, drafts, audits — every type has a home.</div>
+        </div>
+        <div class="pillar" data-pillar="infrastructure">
+          <div class="icon">⏚</div>
+          <div class="name">Infrastructure</div>
+          <div class="blurb">Tools wired together. Cloud, ads, tracking, design, email — one connected map.</div>
+        </div>
+        <div class="pillar" data-pillar="lifecycle">
+          <div class="icon">↻</div>
+          <div class="name">Lifecycle</div>
+          <div class="blurb">Session start to session end. Read memory, claim role, do work, save state.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roles">
+    <div class="wrap">
+      <div class="section-tag">The Team — five tiers</div>
+      <h2>Five tiers, one chain. Everything passes through the gate.</h2>
+      <p class="lede">Every task — from "send this venue reply" to "audit our advertising infrastructure" — flows through the same chain. Light AI for triage. Heavy AI for strategy. A quality gate before anything reaches the human. The roles map cleanly across whatever AI you bring.</p>
+
+      <div class="roles">
+        <div class="role" data-role="itc">
+          <div class="code">ITC</div>
+          <div class="title">Intake</div>
+          <div class="level">First touch · fastest model</div>
+          <div class="desc">The front door. New request arrives, intake triages: what is this, what does it need, who should handle it. Drafts a session brief, passes upward.</div>
+        </div>
+        <div class="role" data-role="mrc">
+          <div class="code">MRC</div>
+          <div class="title">Master</div>
+          <div class="level">Senior strategist · highest tier</div>
+          <div class="desc">Reads the brief, reads memory, claims the role, builds the plan. Reserved for decisions that matter — strategy, devil's advocate, infrastructure debugging.</div>
+        </div>
+        <div class="role" data-role="src">
+          <div class="code">SRC</div>
+          <div class="title">Senior</div>
+          <div class="level">Executor · drafts deliverables</div>
+          <div class="desc">Takes the plan, builds the draft, runs the audit, fixes the infrastructure. The heavy lifting. Most actual deliverables originate here.</div>
+        </div>
+        <div class="role" data-role="qac">
+          <div class="code">QAC</div>
+          <div class="title">Quality</div>
+          <div class="level">Gate · nothing ships without it</div>
+          <div class="desc">Grammar, accuracy, brand voice, link integrity, PII scan. Every artifact passes through. Failures route back; only clean work reaches the human.</div>
+        </div>
+        <div class="role" data-role="jrc">
+          <div class="code">JRC</div>
+          <div class="title">Junior</div>
+          <div class="level">Filer · session state · ledger</div>
+          <div class="desc">Once work passes QA, junior files it to the right folder, appends the session state, presents the deliverable with a clean link to the human.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="infra-section">
+    <div class="wrap">
+      <div class="section-tag">Infrastructure — the master brain</div>
+      <h2>Your cloud is the engine. Everything else just plugs in.</h2>
+      <p class="lede">MasCom never replaces what you already have. Your cloud storage is the master brain. Your existing tools — website, ads, design, email, calendars — wire into it. The system orchestrates. The data stays yours.</p>
+
+      <div class="infra-diagram">
+        <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Infrastructure map: cloud storage at center, connected to website, ads, tracking, email, design, calendar tools">
+          <style>
+            .ndlabel { font: 600 14px 'Inter', sans-serif; fill: #e9e4d4; }
+            .ndlabel-sub { font: 11px 'JetBrains Mono', monospace; fill: #a89f88; letter-spacing: 0.05em; }
+            .ndbox { fill: #1f1c16; stroke: #2a2620; stroke-width: 1; }
+            .ndbox-center { fill: #2a2620; stroke: #c9a86a; stroke-width: 1.5; }
+            .conn { stroke: #75705f; stroke-width: 1; fill: none; }
+            .conn-active { stroke: #c9a86a; stroke-width: 1.5; fill: none; }
+          </style>
+          <!-- Center: Cloud -->
+          <rect x="280" y="20" width="160" height="64" rx="4" class="ndbox-center"/>
+          <text x="360" y="45" text-anchor="middle" class="ndlabel">Your Cloud</text>
+          <text x="360" y="64" text-anchor="middle" class="ndlabel-sub">MASTER BRAIN</text>
+          <text x="360" y="78" text-anchor="middle" class="ndlabel-sub">drive · onedrive · etc</text>
+          <!-- Connections (curved) -->
+          <path d="M 320 84 Q 200 140 130 200" class="conn-active"/>
+          <path d="M 360 84 Q 360 140 360 200" class="conn-active"/>
+          <path d="M 400 84 Q 520 140 590 200" class="conn-active"/>
+          <path d="M 320 84 Q 220 200 130 280" class="conn"/>
+          <path d="M 400 84 Q 500 200 590 280" class="conn"/>
+          <!-- Tools row 1 -->
+          <rect x="60" y="200" width="140" height="56" rx="4" class="ndbox"/>
+          <text x="130" y="225" text-anchor="middle" class="ndlabel">Website</text>
+          <text x="130" y="245" text-anchor="middle" class="ndlabel-sub">wix · webflow · custom</text>
+          <rect x="290" y="200" width="140" height="56" rx="4" class="ndbox"/>
+          <text x="360" y="225" text-anchor="middle" class="ndlabel">Ads + Tracking</text>
+          <text x="360" y="245" text-anchor="middle" class="ndlabel-sub">google ads · gtm · ga</text>
+          <rect x="520" y="200" width="140" height="56" rx="4" class="ndbox"/>
+          <text x="590" y="225" text-anchor="middle" class="ndlabel">Design</text>
+          <text x="590" y="245" text-anchor="middle" class="ndlabel-sub">canva · figma · cloudinary</text>
+          <!-- Tools row 2 -->
+          <rect x="60" y="280" width="140" height="56" rx="4" class="ndbox"/>
+          <text x="130" y="305" text-anchor="middle" class="ndlabel">Email</text>
+          <text x="130" y="325" text-anchor="middle" class="ndlabel-sub">gmail · outlook · icloud</text>
+          <rect x="520" y="280" width="140" height="56" rx="4" class="ndbox"/>
+          <text x="590" y="305" text-anchor="middle" class="ndlabel">Calendar</text>
+          <text x="590" y="325" text-anchor="middle" class="ndlabel-sub">google · outlook · cal.com</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="examples">
+    <div class="wrap">
+      <div class="section-tag">Sample roles — what your MasCom could look like</div>
+      <h2>One architecture, every role.</h2>
+      <p class="lede">Every MasCom is a fractal of the same architecture, tailored to a specific role. The structure adapts to the vocabulary; the governance stays the same.</p>
+
+      <div class="grid-cards">
+        <article class="card">
+          <div class="role-tag">Lighthouse vertical</div>
+          <h3>The Detective</h3>
+          <p>Cold-case nav with hypothesis ranking, contradiction tracking, and a forensic seal-score on every claim. Your "MasComHQ" becomes a Detective Whiteboard at investigator scale.</p>
+        </article>
+        <article class="card">
+          <div class="role-tag">Local services</div>
+          <h3>The Real Estate Operator</h3>
+          <p>One MasComHQ per property. Sub-tenancies for renovation, accounting, marketing. Books, photos, contracts — all in your storage, never anyone else's.</p>
+        </article>
+        <article class="card">
+          <div class="role-tag">Solo professional</div>
+          <h3>The Tax Preparer</h3>
+          <p>Client cases, document trails, deadline cascades. Source-of-truth lives in your file system; AI synthesizes against your real records, not its training data.</p>
+        </article>
+        <article class="card">
+          <div class="role-tag">Independent creator</div>
+          <h3>The Illustrator</h3>
+          <p>Project briefs, asset versions, client revisions, royalty splits. Every artifact has a verifiable history and an interface for the human collaborator.</p>
+        </article>
+        <article class="card">
+          <div class="role-tag">Care provider</div>
+          <h3>The Nurse Practitioner</h3>
+          <p>Patient context, clinical notes, follow-up cadence. Privacy-by-default tenancy. Never leaves your environment without explicit, audited permission.</p>
+        </article>
+        <article class="card" style="border-style: dashed;">
+          <div class="role-tag">Bring your own</div>
+          <h3>Your role</h3>
+          <p>Speak it into the microphone. MasCom synthesizes the role-specific schema, departments, and starter SOPs — tuned to your work, your storage, your AI.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="restoration-story">
+    <div class="wrap">
+      <div class="section-tag">Why this exists — a brief story</div>
+      <h2>The Restoration Architecture.</h2>
+
+      <p style="color: var(--ink-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">MasCom did not start as a software project. It started as a working system one person built to keep a real venue running, real properties operating, and real customers heard — without hiring out roles he could not afford to fill. He restores buildings as a literal job. He built MasCom so the systems behind those buildings could be restored too.</p>
+
+      <div class="quote-block">
+        "The buildings were broken. The systems were broken. All have been rebuilt from the foundation up. That is not a coincidence. That is architecture."
+        <span class="attribution">— from the build journal</span>
+      </div>
+
+      <div class="triad">
+        <div class="triad-item">
+          <div class="label">Buildings</div>
+          <div class="body">Four properties under restoration. One <em>flagship venue</em> open and operating: Main Street Manor in Crittenden, Kentucky.</div>
+        </div>
+        <div class="triad-item">
+          <div class="label">Systems</div>
+          <div class="body">22 custom skills, 8 SOP folders, a 5-tier role cascade, a forensic-scored ledger of every decision. <em>Built session by session.</em></div>
+        </div>
+        <div class="triad-item">
+          <div class="label">Discipline</div>
+          <div class="body">Append-only history. ROI gate before each escalation. Quality check before anything ships. <em>The work is holding.</em></div>
+        </div>
+      </div>
+
+      <p style="color: var(--ink-muted); font-size: 1.05rem;">MasCom is, at its core, a system of organized hope: that if you build the right structure, put the right guardrails in place, and refuse to cut corners even when you're exhausted — the work will hold. Now anyone with a real role and a real workload can run their own.</p>
+    </div>
+  </section>
+
+  <section id="join" class="cta-section">
+    <div class="wrap">
+      <h2>Be one of the first.</h2>
+      <p class="lede" style="margin-left: auto; margin-right: auto;">Proof of concept #1 is the architect. Family and friends are next. Then a public, BYOK system anyone can run on their own AI and storage. Leave an email and you'll hear when the first invites go out.</p>
+
+      <form class="cta-form" onsubmit="event.preventDefault(); document.getElementById('cta-msg').textContent = 'Thanks — captured. We will reach out.';">
+        <input type="email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Notify me</button>
+      </form>
+      <p class="cta-note" id="cta-msg">No spam. Single notification when invites open. Bring your own AI when you arrive.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="col">
+        <h4>MasCom</h4>
+        <ul>
+          <li>Universal AI governance</li>
+          <li>BYOK · BYOC · BYOAI</li>
+          <li>Pure Heart Directive</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Pillars</h4>
+        <ul>
+          <li>Hierarchy · Flow</li>
+          <li>Timeline · Documents</li>
+          <li>Infrastructure · Lifecycle</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>The team</h4>
+        <ul>
+          <li>Intake · Master · Senior</li>
+          <li>Quality · Junior</li>
+          <li>One chain, one chart</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Built by</h4>
+        <ul>
+          <li>Paul Travis</li>
+          <li>26 Cents LLC · Crittenden, KY</li>
+          <li>2025–2026</li>
+        </ul>
+      </div>
+      <div class="legal">
+        <p>© 2026 26 Cents LLC. MasCom is a fractal-tenancy AI governance system. This is the public proof-of-concept; no tenant data appears here; the email form does not yet subscribe you to anything. <em>Pure Heart Directive: 100% Legal, 100% Ethical, Zero Greed.</em></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Clickable timeline steps
+    document.querySelectorAll('.step').forEach(el => {
+      el.addEventListener('click', () => {
+        el.classList.toggle('active');
+        const t = el.querySelector('.toggle');
+        if (t) t.textContent = el.classList.contains('active') ? '−' : '+';
+      });
+    });
+
+    // Pillar click — toggle simple expand effect (placeholder; real definitions could open a modal)
+    document.querySelectorAll('.pillar').forEach(el => {
+      el.addEventListener('click', () => {
+        el.style.transform = 'translateY(-2px) scale(1.02)';
+        setTimeout(() => { el.style.transform = ''; }, 200);
+      });
+    });
+    // Role click — same gentle feedback
+    document.querySelectorAll('.role, .card').forEach(el => {
+      el.addEventListener('click', () => {
+        el.style.transform = 'translateY(-2px) scale(1.01)';
+        setTimeout(() => { el.style.transform = ''; }, 200);
+      });
+    });
+
+    // Open the first step expanded by default to show interactivity
+    const firstStep = document.querySelector('.step');
+    if (firstStep) {
+      firstStep.classList.add('active');
+      const t = firstStep.querySelector('.toggle');
+      if (t) t.textContent = '−';
+    }
+  </script>
+</body>
+</html>
