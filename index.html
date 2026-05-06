@@ -328,13 +328,7 @@ footer .copyright{font-family:var(--mono);font-size:0.75rem;color:var(--ink-dim)
   </div>
 </section>
 
-<!-- ========================================================================
-     §B.6 — EXPLORE (overhauled)
-     Anonymity 4-test: PASS
-       - Sample personas are GENERIC ("Detective Sample" not "Patti's"; etc.)
-       - Confidence Score (public vocab) replaces Forensic Seal
-       - Multi-AI plain English explanation present
-     ======================================================================== -->
+<!-- Sample personas are GENERIC. Confidence Score is public vocab. Multi-AI plain English explanation present. -->
 <section id="explore">
   <div class="wrap">
     <div class="section-tag">Explore</div>
@@ -573,82 +567,146 @@ footer .copyright{font-family:var(--mono);font-size:0.75rem;color:var(--ink-dim)
   </div>
 </section>
 
-<!-- ========================================================================
-     §B.10 — ROUTING VISUALIZATION
-     Anonymity 4-test: PASS
-       - Public vocab only (Intake/Master/Senior/Junior/Quality)
-       - Internal acronyms (ITC/MRC/SRC/JRC/QAC) NEVER appear
-       - Routing decisions made VISIBLE
-     ======================================================================== -->
+<!-- Public-vocab only. Variable scale (no headcount signal). Quality gate visible. Fractal recursion shown via fan-out tabs. -->
 <section id="routing">
   <div class="wrap">
-    <div class="section-tag">Multi-AI Council Room</div>
-    <h2>Stew talks to <em>all</em> your AIs at once. Picks the best one for each question.</h2>
-    <p class="lede">Most AI tools give you one model. Stew uses a council. For every task, Stew routes to the AI best suited for it — at the price tier you're paying. The routing intelligence is the moat.</p>
+    <div class="section-tag">The Cascade</div>
+    <h2>Your work flows through a <em>five-role cascade</em>. Quality gate before you see anything.</h2>
+    <p class="lede">Most AI tools give you one model and one perspective. Stew runs a cascade — Intake sorts your request, Master plans the work, Senior does the heavy lifting, Quality checks it, Junior files it. The Quality gate fails work back to Senior if it's not right. You see only what passes.</p>
 
+    <!-- Diagram 1: The Cascade — sequential pipeline with revision loop -->
     <div class="routing-frame">
-      <svg viewBox="0 0 800 360" role="img" aria-label="Routing diagram showing how Stew dispatches a project across multiple AI tiers">
+      <svg viewBox="0 0 880 220" role="img" aria-label="The Cascade: sequential pipeline from You through Intake, Master, Senior, Quality, Junior, back to You. A revision arrow loops Quality back to Senior.">
         <defs>
-          <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <marker id="arrow-cascade" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
             <polygon points="0 0, 8 4, 0 8" fill="#c9a86a"/>
+          </marker>
+          <marker id="arrow-loop" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <polygon points="0 0, 8 4, 0 8" fill="#a64b2a"/>
           </marker>
         </defs>
 
-        <!-- INTAKE -->
-        <rect x="40" y="150" width="120" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
-        <text x="100" y="180" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Intake</text>
-        <text x="100" y="200" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">cheapest tier</text>
+        <!-- Role boxes -->
+        <rect x="20"  y="80" width="100" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="70" y="108" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">You</text>
+        <text x="70" y="128" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="9">your request</text>
 
-        <!-- MASTER -->
-        <rect x="220" y="80" width="130" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
-        <text x="285" y="110" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Master</text>
-        <text x="285" y="130" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">strategic reasoning</text>
+        <rect x="150" y="80" width="100" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="200" y="108" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Intake</text>
+        <text x="200" y="128" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="9">sorts &amp; drafts</text>
 
-        <!-- SENIOR (multiple) -->
-        <rect x="220" y="220" width="130" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
-        <text x="285" y="250" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Senior × N</text>
-        <text x="285" y="270" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">domain experts</text>
+        <rect x="280" y="80" width="100" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="330" y="108" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Master</text>
+        <text x="330" y="128" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="9">plans the work</text>
 
-        <!-- JUNIOR (parallel) -->
-        <rect x="410" y="40" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
-        <text x="475" y="68" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #1</text>
+        <rect x="410" y="80" width="100" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="460" y="108" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Senior</text>
+        <text x="460" y="128" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="9">heavy lifting</text>
 
-        <rect x="410" y="100" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
-        <text x="475" y="128" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #2</text>
+        <rect x="540" y="80" width="100" height="60" rx="4" fill="#1f1c16" stroke="#a64b2a" stroke-width="2"/>
+        <text x="590" y="108" text-anchor="middle" fill="#d68c6e" font-family="Cormorant Garamond" font-size="16">Quality</text>
+        <text x="590" y="128" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="9">checks it</text>
 
-        <rect x="410" y="180" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
-        <text x="475" y="208" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #3</text>
+        <rect x="670" y="80" width="100" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="720" y="108" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Junior</text>
+        <text x="720" y="128" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="9">files &amp; hands off</text>
 
-        <rect x="410" y="260" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
-        <text x="475" y="288" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #4 (parallel)</text>
+        <rect x="800" y="80" width="60" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="830" y="108" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Done</text>
+        <text x="830" y="128" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="9">to you</text>
 
-        <!-- QUALITY -->
-        <rect x="600" y="150" width="130" height="60" rx="4" fill="#1f1c16" stroke="#a64b2a" stroke-width="1.5"/>
-        <text x="665" y="180" text-anchor="middle" fill="#d68c6e" font-family="Cormorant Garamond" font-size="16">Quality</text>
-        <text x="665" y="200" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">adversarial audit</text>
+        <!-- Forward arrows -->
+        <line x1="120" y1="110" x2="150" y2="110" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow-cascade)"/>
+        <line x1="250" y1="110" x2="280" y2="110" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow-cascade)"/>
+        <line x1="380" y1="110" x2="410" y2="110" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow-cascade)"/>
+        <line x1="510" y1="110" x2="540" y2="110" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow-cascade)"/>
+        <line x1="640" y1="110" x2="670" y2="110" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow-cascade)"/>
+        <line x1="770" y1="110" x2="800" y2="110" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow-cascade)"/>
 
-        <!-- ARROWS -->
-        <line x1="160" y1="180" x2="220" y2="120" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow)"/>
-        <line x1="160" y1="180" x2="220" y2="240" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow)"/>
-        <line x1="350" y1="120" x2="410" y2="65" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
-        <line x1="350" y1="120" x2="410" y2="125" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
-        <line x1="350" y1="240" x2="410" y2="205" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
-        <line x1="350" y1="240" x2="410" y2="285" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
-        <line x1="540" y1="65" x2="600" y2="160" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
-        <line x1="540" y1="125" x2="600" y2="170" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
-        <line x1="540" y1="205" x2="600" y2="190" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
-        <line x1="540" y1="285" x2="600" y2="200" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
+        <!-- Revision loop: Quality back to Senior (distinct dashed accent) -->
+        <path d="M 590 80 Q 590 30 460 30 Q 460 30 460 80" fill="none" stroke="#a64b2a" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow-loop)"/>
+        <text x="525" y="22" text-anchor="middle" fill="#d68c6e" font-family="JetBrains Mono" font-size="10" font-style="italic">if not right · revision</text>
+
+        <!-- Legend -->
+        <text x="20" y="195" fill="#a89f88" font-family="JetBrains Mono" font-size="10">solid arrow = forward flow</text>
+        <text x="280" y="195" fill="#d68c6e" font-family="JetBrains Mono" font-size="10">dashed = Quality fails work back to Senior</text>
       </svg>
     </div>
 
     <div class="routing-note">
-      <strong>What you're seeing:</strong> a single project routed across the council.
-      <strong>Junior #1</strong> went to a fast, cheap model (free-tier-default) because the task was simple summarization.
-      <strong>Junior #2</strong> went to a deep-reasoning model because it required structured legal analysis.
-      <strong>Junior #3</strong> went to a different provider entirely because that provider is best at this category right now.
-      <strong>Quality</strong> compared all four results adversarially before any answer reached you.
-      <br><br>
-      <strong>Free tier:</strong> the council uses bundled fast models. <strong>Paid tiers:</strong> the council uses your connected AIs (bring your own keys) and routes to the strongest one for each task class — never the most expensive by default.
+      <strong>The check step is the moat.</strong> Quality always sees the work before you do. If something is wrong, Quality sends it back to Senior — not to you. You only see deliverables that have passed an independent check.
+    </div>
+
+    <!-- Diagram 2: The Fan-Out — fractal recursion at scale -->
+    <h2 style="margin-top:4rem">Same cascade. <em>Any</em> scale.</h2>
+    <p class="lede">There's no headcount limit. The Master plans as many Seniors as the work needs. Each Senior plans as many Juniors as their sub-area needs. Quality checks all of it. Your Stew scales to the problem, not the other way around.</p>
+
+    <div class="explore-tabs" style="margin-top:2rem">
+      <div class="tabs-bar" role="tablist">
+        <button class="tab active" data-fanout="small" onclick="switchFanout('small')"><span>Small · "Reply to a customer email"</span></button>
+        <button class="tab" data-fanout="medium" onclick="switchFanout('medium')"><span>Medium · "Plan your real estate portfolio"</span></button>
+        <button class="tab" data-fanout="massive" onclick="switchFanout('massive')"><span>Massive · "Solve a problem in your industry"</span></button>
+      </div>
+
+      <div class="tab-portal" id="fanout-small">
+        <div class="role-tag">Small Project</div>
+        <h3>Reply to a customer email</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">Single thread of work. One of each role. Finishes in seconds.</p>
+        <div class="case-arc" style="margin-top:1.5rem">
+          <div class="arc-step"><div class="arc-when">Intake × 1</div><div class="arc-what">Read email. Identify intent. Draft what the user is really asking for.</div><div class="arc-confidence">95%</div></div>
+          <div class="arc-step"><div class="arc-when">Master × 1</div><div class="arc-what">Plan: confirm policy, look up account, draft reply.</div><div class="arc-confidence">94%</div></div>
+          <div class="arc-step"><div class="arc-when">Senior × 1</div><div class="arc-what">Heavy lifting: writes the reply.</div><div class="arc-confidence">93%</div></div>
+          <div class="arc-step"><div class="arc-when">Quality × 1</div><div class="arc-what">Checks tone, accuracy, brand voice. Pass.</div><div class="arc-confidence">96%</div></div>
+          <div class="arc-step"><div class="arc-when">Junior × 1</div><div class="arc-what">Files the exchange in the customer's project. Hands you the reply for one-click send.</div><div class="arc-confidence">98%</div></div>
+        </div>
+      </div>
+
+      <div class="tab-portal" id="fanout-medium" hidden>
+        <div class="role-tag">Medium Project</div>
+        <h3>Plan your real estate portfolio</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">Several sub-areas, each with its own Senior. Multiple Juniors per sub-area. Finishes in minutes-to-hours depending on scope.</p>
+        <div class="case-arc" style="margin-top:1.5rem">
+          <div class="arc-step"><div class="arc-when">Intake × 1</div><div class="arc-what">Sorts your request into sub-areas: financing, acquisition, legal/tax, renovation.</div><div class="arc-confidence">92%</div></div>
+          <div class="arc-step"><div class="arc-when">Master × 1</div><div class="arc-what">Plans the work. Assigns one Senior per sub-area. Writes the playbook for each.</div><div class="arc-confidence">90%</div></div>
+          <div class="arc-step"><div class="arc-when">Senior × 4</div><div class="arc-what"><strong>Financing</strong> Senior plans 3 Juniors (rate research, LTV calc, lender comparison).<br><strong>Acquisition</strong> Senior plans 2 Juniors (market scan, comp analysis).<br><strong>Legal/Tax</strong> Senior plans 4 Juniors (entity review, tax-strategy, deed search, insurance).<br><strong>Renovation</strong> Senior plans 5 Juniors (scope, contractor research, budget, timeline, materials).</div><div class="arc-confidence">88%</div></div>
+          <div class="arc-step"><div class="arc-when">Junior × 14</div><div class="arc-what">Each handles one specific task. Reports back to its Senior with structured findings.</div><div class="arc-confidence">86%</div></div>
+          <div class="arc-step"><div class="arc-when">Quality × 1</div><div class="arc-what">Audits each sub-area's output. Sends 2 of 14 Junior outputs back to their Seniors for revision (numbers didn't add up). Passes the rest.</div><div class="arc-confidence">93%</div></div>
+          <div class="arc-step"><div class="arc-when">Junior × 1</div><div class="arc-what">Files all 14 sub-area reports into your Real Estate project. Hands you the synthesis.</div><div class="arc-confidence">95%</div></div>
+        </div>
+      </div>
+
+      <div class="tab-portal" id="fanout-massive" hidden>
+        <div class="role-tag">Massive Project</div>
+        <h3>Solve a problem in your industry</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">Major undertaking. Many Seniors. Hundreds of Juniors. Quality cascade on every layer. Finishes in hours instead of months.</p>
+        <div class="case-arc" style="margin-top:1.5rem">
+          <div class="arc-step"><div class="arc-when">Intake × 1</div><div class="arc-what">Receives the problem statement. Sorts into 5 sub-areas (depending on the problem domain).</div><div class="arc-confidence">90%</div></div>
+          <div class="arc-step"><div class="arc-when">Master × 1</div><div class="arc-what">Plans the entire effort. Assigns 5 Seniors. Writes the playbook for each sub-area. Plans the Quality topology (Quality × 3 — three independent auditors on different AI platforms for cross-check).</div><div class="arc-confidence">88%</div></div>
+          <div class="arc-step"><div class="arc-when">Senior × 5</div><div class="arc-what"><strong>Senior 1</strong> plans 8 Juniors.<br><strong>Senior 2</strong> plans 12 Juniors.<br><strong>Senior 3</strong> plans 6 Juniors.<br><strong>Senior 4</strong> plans 9 Juniors.<br><strong>Senior 5</strong> plans 7 Juniors.<br>Each Senior writes an explicit plan for their Juniors. Plan-explicitness is what keeps quality high at scale.</div><div class="arc-confidence">85%</div></div>
+          <div class="arc-step"><div class="arc-when">Junior × 42</div><div class="arc-what">Each handles one bounded task. 42 parallel work streams. Each reports back to its Senior with structured findings + sources.</div><div class="arc-confidence">82%</div></div>
+          <div class="arc-step"><div class="arc-when">Quality × 3</div><div class="arc-what">Three independent auditors on three different AI platforms each audit the work. They disagree on 4 items. Master reconciles. Sends 7 items back to Seniors for revision.</div><div class="arc-confidence">94%</div></div>
+          <div class="arc-step"><div class="arc-when">Junior × 1</div><div class="arc-what">Files all 42 sub-area reports into your project. Synthesizes the cross-cutting recommendations. Hands you a structured deliverable with confidence on every conclusion.</div><div class="arc-confidence">95%</div></div>
+        </div>
+        <div class="routing-note" style="margin-top:1.5rem">
+          <strong>Total roles spawned:</strong> 1 Intake · 1 Master · 5 Seniors · 42 Juniors · 3 Quality auditors. Plus 1 Junior for filing. <strong>52 work streams total.</strong> No human had to manage them.
+        </div>
+      </div>
+    </div>
+
+    <!-- Three explainer paragraphs -->
+    <div style="margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+      <div class="why-card">
+        <h3>How is this different from one AI doing everything?</h3>
+        <p>One AI handling everything is one perspective, one judgment call, one failure point. Stew's cascade splits the work the way a competent organization does — someone plans, someone executes, someone checks, someone files. The check step catches mistakes before they reach you.</p>
+      </div>
+      <div class="why-card">
+        <h3>How do I know it's not overkill for small things?</h3>
+        <p>The cascade scales down as easily as it scales up. A simple question routes through one of each role and finishes in seconds. A massive project routes through dozens of Seniors and hundreds of Juniors and finishes in hours instead of months. You don't choose the scale — the work does.</p>
+      </div>
+      <div class="why-card">
+        <h3>How does Stew pick which AI does which role?</h3>
+        <p>Among the AIs you've connected to your Stew, the best one for each job class gets the work. A premium reasoning model might handle the Master role; a fast cheap model might handle Intake or Junior. The routing is automatic and tuned for quality first, cost second.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -890,9 +948,16 @@ function scrollToId(id){
 }
 
 function switchTab(name){
-  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.portal === name));
-  document.querySelectorAll('.tab-portal').forEach(p => {
+  document.querySelectorAll('.tab[data-portal]').forEach(t => t.classList.toggle('active', t.dataset.portal === name));
+  document.querySelectorAll('[id^="portal-"]').forEach(p => {
     p.hidden = (p.id !== 'portal-' + name);
+  });
+}
+
+function switchFanout(name){
+  document.querySelectorAll('.tab[data-fanout]').forEach(t => t.classList.toggle('active', t.dataset.fanout === name));
+  document.querySelectorAll('[id^="fanout-"]').forEach(p => {
+    p.hidden = (p.id !== 'fanout-' + name);
   });
 }
 
