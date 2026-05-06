@@ -3,20 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Stew — your personal AI helper for real work. Bring your own AI, your own cloud, and run your own vault.">
+<meta name="description" content="Tell Stew. Organize anything. Stew gives anyone the back-office of a trillion-dollar corporation in their pocket.">
 <meta name="robots" content="index, follow">
-<title>Stew — Your AI Helper for Real Work</title>
+<meta property="og:title" content="Stew — Tell Stew. Organize Anything.">
+<meta property="og:description" content="The back-office of a trillion-dollar corporation, in your pocket. Tell Stew what you want to organize. Stew handles the rest.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xr7t9ops.github.io/mascom-public-poc/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stew — Tell Stew. Organize Anything.">
+<meta name="twitter:description" content="The back-office of a trillion-dollar corporation, in your pocket.">
+<link rel="canonical" href="https://xr7t9ops.github.io/mascom-public-poc/">
+<title>Stew — Tell Stew. Organize Anything.</title>
 <style>
-:root{--bg-deep:#0e0d0a;--bg-paper:#161410;--bg-card:#1f1c16;--bg-card-hover:#28241c;--ink:#e9e4d4;--ink-muted:#a89f88;--ink-dim:#75705f;--accent-gold:#c9a86a;--accent-gold-bright:#d8b97a;--accent-rust:#a64b2a;--accent-deep-green:#4a6b4d;--accent-blue:#5e7a99;--rule:#2a2620;--serif:'Cormorant Garamond','Crimson Pro',Georgia,serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--mono:'JetBrains Mono',Consolas,monospace}
+:root{
+  --bg-deep:#0e0d0a;--bg-paper:#161410;--bg-card:#1f1c16;--bg-card-hover:#28241c;
+  --ink:#e9e4d4;--ink-muted:#a89f88;--ink-dim:#75705f;
+  --accent-gold:#c9a86a;--accent-gold-bright:#d8b97a;--accent-rust:#a64b2a;
+  --accent-deep-green:#4a6b4d;--accent-blue:#5e7a99;
+  --rule:#2a2620;
+  --serif:'Cormorant Garamond','Crimson Pro',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',Consolas,monospace;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg-deep);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+a{color:var(--accent-gold);text-decoration:none;cursor:pointer}
+a:hover{color:var(--accent-gold-bright)}
+
+/* NAV */
 nav{position:sticky;top:0;z-index:50;background:rgba(14,13,10,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem}
 .brand{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--accent-gold);letter-spacing:0.05em;cursor:pointer}
 .brand .dot{color:var(--accent-rust)}
-nav ul{list-style:none;display:flex;gap:1.25rem;flex-wrap:wrap}
+nav ul{list-style:none;display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center}
 nav a{color:var(--ink-muted);text-decoration:none;font-size:0.85rem;transition:color 0.15s;cursor:pointer}
 nav a:hover{color:var(--accent-gold)}
 .btn{display:inline-block;padding:0.85rem 1.5rem;font-size:0.95rem;font-weight:500;text-decoration:none;border-radius:2px;transition:all 0.15s;cursor:pointer;border:none;font-family:inherit}
@@ -24,6 +45,7 @@ nav a:hover{color:var(--accent-gold)}
 .btn-primary:hover{background:var(--accent-gold-bright);transform:translateY(-1px)}
 .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
 .btn-ghost:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
+.btn-join{padding:0.55rem 1.1rem;font-size:0.85rem}
 
 /* HERO */
 .hero{padding:6rem 0 5rem;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
@@ -40,561 +62,869 @@ section h2 em{color:var(--accent-gold);font-style:italic}
 section .lede{color:var(--ink-muted);max-width:720px;margin-bottom:3rem;font-size:1.1rem}
 section .section-tag{font-family:var(--mono);font-size:0.75rem;color:var(--accent-rust);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem}
 
-/* METRICS */
-.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.25rem;margin-top:2rem}
-.metric{background:var(--bg-card);border:1px solid var(--rule);padding:2rem 1.5rem;text-align:center;border-radius:4px;transition:border-color 0.2s}
-.metric:hover{border-color:var(--accent-gold)}
-.metric .num{font-family:var(--serif);font-size:3.25rem;font-weight:500;color:var(--accent-gold);line-height:1}
-.metric .label{color:var(--ink-muted);font-size:0.85rem;margin-top:0.5rem;letter-spacing:0.04em}
+/* TELL-STEW PATTERN */
+.tellstew-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2rem}
+.tellstew-item{background:var(--bg-card);border:1px solid var(--rule);padding:1.5rem;border-radius:4px;border-left:3px solid var(--accent-gold)}
+.tellstew-item .ask{color:var(--ink-muted);font-size:0.95rem;margin-bottom:0.5rem}
+.tellstew-item .response{font-family:var(--serif);font-size:1.25rem;color:var(--accent-gold);font-weight:500}
 
-/* TABS-AS-PORTAL */
-.tabs-portal{margin-top:2rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+/* PROJECTS GRID */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem;margin-top:2rem}
+.project-card{background:var(--bg-card);border:1px solid var(--rule);padding:1.75rem;border-radius:4px;transition:all 0.2s}
+.project-card:hover{border-color:var(--accent-gold);transform:translateY(-2px)}
+.project-card .ptag{font-family:var(--mono);font-size:0.7rem;color:var(--accent-rust);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem}
+.project-card h3{font-family:var(--serif);font-size:1.4rem;font-weight:500;margin-bottom:0.75rem}
+.project-card p{color:var(--ink-muted);font-size:0.95rem}
+
+/* EXPLORE TABS */
+.explore-tabs{margin-top:2rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
 .tabs-bar{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--rule);background:var(--bg-deep)}
 .tab{flex:1;min-width:140px;padding:1rem 0.75rem;background:transparent;border:none;border-right:1px solid var(--rule);color:var(--ink-muted);cursor:pointer;font-family:var(--sans);font-size:0.9rem;text-align:center;transition:all 0.2s;border-bottom:2px solid transparent}
 .tab:last-child{border-right:none}
 .tab:hover{color:var(--ink);background:rgba(201,168,106,0.04)}
 .tab.active{color:var(--accent-gold);border-bottom-color:var(--accent-gold);background:var(--bg-card-hover)}
-.tab .tab-tag{display:block;font-family:var(--mono);font-size:0.65rem;color:var(--accent-rust);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem}
-.tab .tab-name{font-family:var(--serif);font-size:1.1rem;font-weight:500}
-.tab-portal{padding:2rem 1.75rem;min-height:520px}
+.tab-portal{padding:2rem 1.75rem;min-height:420px}
 .tab-portal[hidden]{display:none}
-.portal-back{display:inline-flex;align-items:center;gap:0.4rem;color:var(--ink-muted);background:transparent;border:1px solid var(--rule);padding:0.5rem 0.9rem;border-radius:2px;font-family:var(--mono);font-size:0.8rem;cursor:pointer;margin-bottom:1.5rem;transition:all 0.15s}
-.portal-back:hover{color:var(--accent-gold);border-color:var(--accent-gold)}
 .portal h3{font-family:var(--serif);font-size:1.85rem;font-weight:500;margin-bottom:0.75rem}
 .portal .role-tag{display:inline-block;font-family:var(--mono);font-size:0.75rem;color:var(--accent-rust);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem}
-.portal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2rem}
+.portal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem}
 .portal-cell{background:var(--bg-card);border:1px solid var(--rule);padding:1.25rem;border-radius:4px}
 .portal-cell h4{font-family:var(--serif);font-size:1.1rem;color:var(--ink);margin-bottom:0.5rem}
 .portal-cell p{color:var(--ink-muted);font-size:0.9rem}
-.portal-cell .pill{display:inline-block;font-family:var(--mono);font-size:0.7rem;padding:0.15rem 0.5rem;border-radius:1rem;letter-spacing:0.05em;margin-right:0.4rem}
-.pill-confirmed{background:rgba(74,107,77,0.25);color:#9bbc9e}
-.pill-active{background:rgba(166,75,42,0.25);color:#d68c6e}
-.pill-pending{background:rgba(94,122,153,0.25);color:#9eb2c9}
-.pill-info{background:rgba(201,168,106,0.18);color:var(--accent-gold-bright)}
-.portal-flow{margin:1.25rem 0;padding:1rem;background:var(--bg-deep);border-left:3px solid var(--accent-gold);font-family:var(--mono);font-size:0.85rem;color:var(--ink-muted);line-height:1.7}
-.portal-flow .step{display:block;margin-bottom:0.4rem}
-.portal-links{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
-.portal-link{padding:0.4rem 0.8rem;border:1px solid var(--rule);border-radius:1rem;font-size:0.8rem;color:var(--ink-muted);text-decoration:none;transition:all 0.15s}
-.portal-link:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
+.confidence{display:inline-block;font-family:var(--mono);font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:1rem;letter-spacing:0.05em;background:rgba(74,107,77,0.25);color:#9bbc9e;margin-top:0.5rem}
+.confidence.medium{background:rgba(94,122,153,0.25);color:#9eb2c9}
+.confidence.low{background:rgba(166,75,42,0.25);color:#d68c6e}
 
-/* SVG SECTIONS */
-.diagram-frame{background:var(--bg-paper);border:1px solid var(--rule);border-radius:4px;padding:2rem;margin-top:2rem}
-.diagram-frame svg{width:100%;height:auto;display:block;margin:0 auto;max-width:760px}
+/* CASE-ARC TIMELINE (proof, not biography) */
+.case-arc{margin:2rem 0;padding:1.5rem;background:var(--bg-deep);border-left:3px solid var(--accent-gold);border-radius:0 4px 4px 0}
+.case-arc .arc-step{display:flex;gap:1rem;padding:0.75rem 0;border-bottom:1px dashed var(--rule)}
+.case-arc .arc-step:last-child{border-bottom:none}
+.case-arc .arc-when{font-family:var(--mono);font-size:0.75rem;color:var(--ink-dim);min-width:90px;letter-spacing:0.05em}
+.case-arc .arc-what{flex:1;color:var(--ink-muted);font-size:0.9rem}
+.case-arc .arc-what strong{color:var(--ink)}
+.case-arc .arc-confidence{font-family:var(--mono);font-size:0.75rem;color:var(--accent-gold);min-width:80px;text-align:right}
 
 /* PILLARS */
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
-.pillar{background:var(--bg-card);border:1px solid var(--rule);padding:1.5rem 1.25rem;border-radius:4px;cursor:pointer;transition:all 0.2s;text-align:center}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.pillar{background:var(--bg-card);border:1px solid var(--rule);padding:1.5rem 1.25rem;border-radius:4px;cursor:pointer;transition:all 0.2s}
 .pillar:hover{border-color:var(--accent-gold);transform:translateY(-2px);background:var(--bg-card-hover)}
 .pillar .icon{font-size:1.6rem;margin-bottom:0.5rem;color:var(--accent-gold);font-family:var(--serif)}
-.pillar .name{font-family:var(--serif);font-size:1.15rem;font-weight:500;margin-bottom:0.25rem}
-.pillar .blurb{color:var(--ink-muted);font-size:0.85rem;line-height:1.4}
+.pillar .name{font-family:var(--serif);font-size:1.15rem;font-weight:500;margin-bottom:0.5rem}
+.pillar .blurb{color:var(--ink-muted);font-size:0.9rem;line-height:1.4;margin-bottom:0.75rem}
+.pillar .example{display:none;color:var(--ink-dim);font-size:0.85rem;font-style:italic;border-top:1px solid var(--rule);padding-top:0.75rem;margin-top:0.5rem}
+.pillar.expanded .example{display:block}
+.pillar .more{font-family:var(--mono);font-size:0.7rem;color:var(--accent-rust);letter-spacing:0.1em}
 
-/* TIMELINE */
-.timeline{position:relative;padding:2rem 0;margin:0 auto;max-width:760px}
-.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--rule);transform:translateX(-1px)}
-.tl-item{position:relative;padding:0.5rem 0;margin-bottom:1.25rem;width:50%}
-.tl-item.left{padding-right:2rem;text-align:right;left:0}
-.tl-item.right{padding-left:2rem;text-align:left;left:50%}
-.tl-item::before{content:"";position:absolute;top:0.7rem;width:12px;height:12px;border-radius:50%;background:var(--bg-card);border:2px solid var(--accent-gold)}
-.tl-item.left::before{right:-7px}
-.tl-item.right::before{left:-7px}
-.tl-item.milestone::before{background:var(--accent-gold);box-shadow:0 0 0 4px rgba(201,168,106,0.2)}
-.tl-item.setback::before{background:var(--accent-rust);border-color:var(--accent-rust)}
-.tl-date{font-family:var(--mono);font-size:0.75rem;color:var(--accent-gold);letter-spacing:0.1em;margin-bottom:0.2rem}
-.tl-event{font-family:var(--serif);font-size:1.05rem;line-height:1.4;color:var(--ink)}
-.tl-detail{color:var(--ink-muted);font-size:0.85rem;margin-top:0.2rem;line-height:1.5}
-@media(max-width:700px){.timeline::before{left:8px}.tl-item.left,.tl-item.right{width:100%;left:0;padding-left:2rem;padding-right:0;text-align:left}.tl-item.left::before,.tl-item.right::before{left:1px;right:auto}}
+/* LAYERS */
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:700px){.layers{grid-template-columns:1fr}}
+.layer{background:var(--bg-card);border:1px solid var(--rule);padding:1.75rem;border-radius:4px;text-align:center}
+.layer .layer-num{font-family:var(--serif);font-size:3rem;color:var(--accent-gold);font-weight:500;line-height:1}
+.layer .layer-name{font-family:var(--serif);font-size:1.25rem;margin-top:0.5rem;color:var(--ink)}
+.layer .layer-blurb{color:var(--ink-muted);font-size:0.9rem;margin-top:0.5rem}
 
-/* CTA */
-.cta-section{background:linear-gradient(180deg,var(--bg-paper) 0%,var(--bg-deep) 100%);text-align:center}
-.cta-form{display:flex;gap:0.75rem;max-width:480px;margin:2rem auto 0;flex-wrap:wrap;justify-content:center}
-.cta-form input{flex:1;min-width:220px;padding:0.9rem 1.2rem;background:var(--bg-card);border:1px solid var(--rule);color:var(--ink);font-family:inherit;font-size:0.95rem;border-radius:2px}
-.cta-form input:focus{outline:none;border-color:var(--accent-gold)}
-.cta-note{color:var(--ink-muted);font-size:0.85rem;margin-top:1rem}
+/* ROUTING */
+.routing-frame{background:var(--bg-paper);border:1px solid var(--rule);border-radius:4px;padding:1.5rem;margin-top:2rem;overflow-x:auto}
+.routing-frame svg{min-width:680px;width:100%;height:auto;display:block;margin:0 auto;max-width:880px}
+.routing-note{font-family:var(--mono);font-size:0.8rem;color:var(--ink-muted);margin-top:1rem;padding:1rem;background:var(--bg-deep);border-left:3px solid var(--accent-gold);line-height:1.7}
+.routing-note strong{color:var(--accent-gold);font-weight:500}
+
+/* SOLO */
+.solo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem;margin-top:1.5rem}
+.solo-tag{background:var(--bg-card);border:1px solid var(--rule);padding:0.75rem 1rem;border-radius:2px;text-align:center;font-size:0.9rem;color:var(--ink-muted)}
+
+/* CLOUD */
+.cloud-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-top:1.5rem}
+.cloud-provider{background:var(--bg-card);border:1px solid var(--rule);padding:1rem;border-radius:4px;text-align:center;font-family:var(--serif);font-size:1.1rem;color:var(--ink-muted)}
+.cloud-provider .check{color:var(--accent-deep-green);margin-right:0.4rem}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
+.price-card{background:var(--bg-card);border:1px solid var(--rule);padding:2rem 1.5rem;border-radius:4px;display:flex;flex-direction:column;transition:all 0.2s}
+.price-card:hover{border-color:var(--accent-gold)}
+.price-card.featured{border-color:var(--accent-gold);background:var(--bg-card-hover)}
+.price-card.featured::before{content:"MOST POPULAR";display:block;font-family:var(--mono);font-size:0.65rem;color:var(--accent-gold);letter-spacing:0.15em;margin-bottom:0.75rem}
+.price-card .tier-name{font-family:var(--serif);font-size:1.4rem;font-weight:500;color:var(--ink);margin-bottom:0.25rem}
+.price-card .tier-price{font-family:var(--serif);font-size:2rem;color:var(--accent-gold);font-weight:500;margin-bottom:0.5rem}
+.price-card .tier-price .per{font-size:0.95rem;color:var(--ink-muted);font-family:var(--sans)}
+.price-card .tier-tag{font-family:var(--mono);font-size:0.7rem;color:var(--accent-rust);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+.price-card ul{list-style:none;color:var(--ink-muted);font-size:0.9rem;flex:1;margin-bottom:1.5rem}
+.price-card ul li{padding:0.4rem 0;border-bottom:1px dashed var(--rule)}
+.price-card ul li:last-child{border-bottom:none}
+.price-card ul li::before{content:"·";color:var(--accent-gold);margin-right:0.5rem;font-weight:bold}
+
+/* WHY EXISTS */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+.why-card{padding:1.5rem;background:var(--bg-card);border:1px solid var(--rule);border-radius:4px;border-left:3px solid var(--accent-gold)}
+.why-card h3{font-family:var(--serif);font-size:1.25rem;color:var(--ink);margin-bottom:0.5rem}
+.why-card p{color:var(--ink-muted);font-size:0.95rem}
+
+/* FINAL CTA */
+.final-cta{padding:6rem 0;text-align:center;background:linear-gradient(135deg,var(--bg-paper) 0%,var(--bg-deep) 100%);border-bottom:1px solid var(--rule)}
+.final-cta h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:500;margin-bottom:1rem}
+.final-cta h2 em{color:var(--accent-gold);font-style:italic}
+.final-cta .lede{color:var(--ink-muted);font-size:1.15rem;margin-bottom:2rem;max-width:600px;margin-left:auto;margin-right:auto}
+.final-cta .btn{font-size:1.1rem;padding:1rem 2.5rem}
+
+/* QUOTE */
+.quote{margin:3rem auto;max-width:720px;padding:1.5rem 2rem;border-left:3px solid var(--accent-gold);background:var(--bg-paper);border-radius:0 4px 4px 0}
+.quote .text{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--ink);line-height:1.5}
+.quote .attrib{font-family:var(--mono);font-size:0.75rem;color:var(--ink-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.75rem}
+
+/* JOIN MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:100;align-items:center;justify-content:center;padding:1.5rem}
+.modal-bg.open{display:flex}
+.modal{background:var(--bg-paper);border:1px solid var(--accent-gold);border-radius:4px;padding:2.5rem;max-width:500px;width:100%;position:relative}
+.modal h3{font-family:var(--serif);font-size:1.85rem;font-weight:500;margin-bottom:0.5rem}
+.modal .lede{color:var(--ink-muted);margin-bottom:1.5rem;font-size:1rem}
+.modal label{display:block;font-family:var(--mono);font-size:0.75rem;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;margin-top:1rem}
+.modal input,.modal textarea{width:100%;padding:0.75rem 1rem;background:var(--bg-deep);border:1px solid var(--rule);color:var(--ink);font-family:var(--sans);font-size:0.95rem;border-radius:2px}
+.modal input:focus,.modal textarea:focus{outline:none;border-color:var(--accent-gold)}
+.modal textarea{min-height:80px;resize:vertical}
+.modal .btn{width:100%;margin-top:1.5rem;font-size:1rem;padding:0.95rem}
+.modal-close{position:absolute;top:1rem;right:1rem;background:transparent;border:none;color:var(--ink-muted);font-size:1.5rem;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--accent-gold)}
+.modal-success{display:none;padding:1rem;background:rgba(74,107,77,0.18);border-left:3px solid var(--accent-deep-green);color:var(--ink);font-size:0.9rem;margin-top:1rem}
+.modal-success.show{display:block}
 
 /* FOOTER */
-footer{padding:3rem 0 4rem;color:var(--ink-muted);font-size:0.9rem}
-footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
-footer .col h4{font-family:var(--serif);color:var(--ink);font-size:1.05rem;margin-bottom:0.75rem;font-weight:500}
-footer .col ul{list-style:none}
-footer .col li{margin-bottom:0.4rem}
-footer .col a{color:var(--ink-muted);text-decoration:none;cursor:pointer}
-footer .col a:hover{color:var(--accent-gold)}
-.legal{grid-column:1/-1;padding-top:2rem;margin-top:1rem;border-top:1px solid var(--rule);font-size:0.8rem}
+footer{padding:3rem 0;background:var(--bg-paper);text-align:center}
+footer p{color:var(--ink-muted);font-size:0.9rem;margin-bottom:0.5rem}
+footer .tagline{font-family:var(--serif);font-size:1.1rem;color:var(--ink);margin-bottom:1rem}
+footer .copyright{font-family:var(--mono);font-size:0.75rem;color:var(--ink-dim);letter-spacing:0.05em}
 
-/* QUOTE BLOCK */
-.quote-block{font-family:var(--serif);font-size:1.5rem;line-height:1.45;color:var(--ink);padding:2rem 0;max-width:800px}
-.quote-block .attribution{color:var(--ink-muted);font-style:normal;font-size:0.9rem;font-family:var(--sans);margin-top:1rem;display:block}
-
-/* PRINT */
-@media print{nav{display:none}.hero{padding:2rem 0}section{padding:2rem 0;page-break-inside:avoid}.tabs-portal{display:none}}
+/* RESPONSIVE */
+@media(max-width:700px){
+  .hero{padding:4rem 0 3rem}
+  section{padding:3.5rem 0}
+  nav ul{display:none}
+  .modal{padding:1.5rem}
+}
 </style>
 </head>
 <body>
 
+<!-- ========================================================================
+     NAV
+     Anonymity 4-test: PASS (no size, no founder, no Paul-specific)
+     ======================================================================== -->
 <nav>
   <div class="wrap">
-    <div class="brand" onclick="goHome()">Stew<span class="dot">·</span></div>
+    <div class="brand" onclick="scrollToId('top')">Stew<span class="dot">·</span></div>
     <ul>
-      <li><a onclick="document.getElementById('proof').scrollIntoView({behavior:'smooth'})">Proof</a></li>
-      <li><a onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Explore</a></li>
-      <li><a onclick="document.getElementById('arch').scrollIntoView({behavior:'smooth'})">Architecture</a></li>
-      <li><a onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Team</a></li>
-      <li><a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">Journey</a></li>
-      <li><a onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">Why</a></li>
-      <li><a onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Join</a></li>
+      <li><a onclick="scrollToId('what')">What</a></li>
+      <li><a onclick="scrollToId('projects')">Projects</a></li>
+      <li><a onclick="scrollToId('explore')">Explore</a></li>
+      <li><a onclick="scrollToId('how')">How</a></li>
+      <li><a onclick="scrollToId('pricing')">Pricing</a></li>
+      <li><button class="btn btn-primary btn-join" onclick="openJoin()">JOIN</button></li>
     </ul>
   </div>
 </nav>
 
-<header class="hero">
+<!-- ========================================================================
+     HERO
+     Anonymity 4-test: PASS
+       - Headcount: no team-size signal
+       - Founder: no person named or implied
+       - Paul-mapping: no Paul-specific reference
+       - Cumulative: nothing identifying
+     ======================================================================== -->
+<header class="hero" id="top">
   <div class="wrap">
-    <div class="sub">A System of Organized Hope</div>
-    <h1>Your AI helper — <em>built around your real job</em>.</h1>
-    <p class="lede">Hi, I'm Agent Steward — but you can call me Stew. I keep track of your work, answer your questions, and help you get things done. Bring your own AI (Claude, GPT, Gemini, or others). Bring your own cloud (Drive, OneDrive, Dropbox). Run your own job: detective, real estate operator, tax preparer, illustrator, anyone with a job that matters. Your space, your rules — I just help it run.</p>
+    <div class="sub">Tell Stew. Organize Anything.</div>
+    <h1>It's like having a <em>trillion-dollar corporation's</em> departments in your pocket.</h1>
+    <p class="lede">Stew is your AI helper for real work — at any size, any kind. Personal life, side hustle, consulting practice, full company. Tell Stew what you want to organize. Stew handles the rest.</p>
     <div class="ctas">
-      <a class="btn btn-primary" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Join the proof of concept</a>
-      <a class="btn btn-ghost" onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Step into a sample role</a>
+      <button class="btn btn-primary" onclick="openJoin()">Tell Stew Now</button>
+      <button class="btn btn-ghost" onclick="scrollToId('explore')">See How It Works</button>
     </div>
   </div>
 </header>
 
-<section id="proof">
+<!-- ========================================================================
+     §B.2 — WHAT (System of Organized Hope, rewritten)
+     Anonymity 4-test: PASS
+       - "professions" not "jobs" per spec
+       - "PROJECTS" framing — universal scope
+       - Trillion-dollar headline reused
+     ======================================================================== -->
+<section id="what">
   <div class="wrap">
-    <div class="section-tag">Proof — already running</div>
-    <h2>Built and running today, by a small team, on commodity hardware.</h2>
-    <p class="lede">The first Stew account is running a real wedding venue and a real-estate holding company. Below are the actual numbers from one of the workflows that runs on it.</p>
-    <div class="metrics">
-      <div class="metric"><div class="num">83<span style="font-size:1.5rem;">%</span></div><div class="label">Time saved per inquiry response</div></div>
-      <div class="metric"><div class="num">22</div><div class="label">Custom AI skills wired into the system</div></div>
-      <div class="metric"><div class="num">8</div><div class="label">Canonical SOP folders structuring the work</div></div>
-      <div class="metric"><div class="num">5</div><div class="label">Tier role cascade governing every task</div></div>
+    <div class="section-tag">What Stew Is</div>
+    <h2>Built around <em>projects</em> — any size, any kind.</h2>
+    <p class="lede">From a non-tech user managing one case all the way up to a massive corporate systems replacement. Stew is built around projects, not jobs, not roles, not departments. Whatever you're trying to organize — that's a project. Stew is the back-office that runs them.</p>
+
+    <div class="tellstew-list">
+      <div class="tellstew-item">
+        <div class="ask">Need legal help?</div>
+        <div class="response">Tell Stew.</div>
+      </div>
+      <div class="tellstew-item">
+        <div class="ask">Need to organize your accounting?</div>
+        <div class="response">Tell Stew.</div>
+      </div>
+      <div class="tellstew-item">
+        <div class="ask">Want everything you've ever done in one searchable place?</div>
+        <div class="response">Tell Stew.</div>
+      </div>
+      <div class="tellstew-item">
+        <div class="ask">Running a practice with clients, schedules, and bills?</div>
+        <div class="response">Tell Stew.</div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p class="text">"Strive to make all things as universal, scalable, sellable, well-translated, linked, frictionless, and high-quality as possible."</p>
+      <p class="attrib">— A founder principle</p>
     </div>
   </div>
 </section>
 
+<!-- ========================================================================
+     §B.3 — MANY PROJECTS IN ONE STEW (new section)
+     Anonymity 4-test: PASS
+       - Generic project classes only (no Paul-specific holdings)
+       - Lead-in verbatim from spec
+     ======================================================================== -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-tag">Many Projects, One Stew</div>
+    <h2>One Stew. <em>Every</em> project.</h2>
+    <p class="lede">Even if you never start a business, you now have something equivalent to having an accountant, a lawyer, a researcher, and a personal archivist on retainer. A single Stew holds many projects at once, each in its own organized space.</p>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="ptag">Project</div>
+        <h3>Real Estate</h3>
+        <p>Track properties, leases, repairs, taxes. Every document, every contact, every dollar in one place.</p>
+      </div>
+      <div class="project-card">
+        <div class="ptag">Project</div>
+        <h3>Accounting</h3>
+        <p>Receipts, invoices, recurring bills, quarterly estimates. Stew watches the patterns; you get the summary.</p>
+      </div>
+      <div class="project-card">
+        <div class="ptag">Project</div>
+        <h3>Legal</h3>
+        <p>Contracts, agreements, signed documents, deadlines. Searchable, sortable, never lost.</p>
+      </div>
+      <div class="project-card">
+        <div class="ptag">Project</div>
+        <h3>Personal History</h3>
+        <p>Photos, journals, timelines, family records. The story of your life, organized like a museum.</p>
+      </div>
+      <div class="project-card">
+        <div class="ptag">Project</div>
+        <h3>Side Hustle</h3>
+        <p>Customer notes, orders, scheduling, supplier contacts. Run it like a real business without hiring one.</p>
+      </div>
+      <div class="project-card">
+        <div class="ptag">Project</div>
+        <h3>Health &amp; Medical</h3>
+        <p>Visits, prescriptions, test results, insurance claims. Bring it all to your next appointment in one tap.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     §B.6 — EXPLORE (overhauled)
+     Anonymity 4-test: PASS
+       - Sample personas are GENERIC ("Detective Sample" not "Patti's"; etc.)
+       - Confidence Score (public vocab) replaces Forensic Seal
+       - Multi-AI plain English explanation present
+     ======================================================================== -->
 <section id="explore">
   <div class="wrap">
-    <div class="section-tag">Explore — click any role to step inside</div>
-    <h2>One helper, every job. <em>Click a tab to step inside.</em></h2>
-    <p class="lede">Your Stew account is shaped around your job. The layout and words change to fit what you do — the rules stay the same. Pick a role to see what it looks like inside.</p>
+    <div class="section-tag">Explore</div>
+    <h2>See Stew <em>act</em> as each kind of project.</h2>
+    <p class="lede">These are working samples. Click a tab to step into a sample Stew. Watch how the project takes shape, how confidence builds as evidence comes in, and how multiple AIs check each other's work before you see it.</p>
 
-    <div class="tabs-portal" id="rolePortal">
+    <div class="explore-tabs">
       <div class="tabs-bar" role="tablist">
-        <button class="tab active" data-role="overview" role="tab" aria-selected="true"><span class="tab-tag">Start</span><span class="tab-name">Overview</span></button>
-        <button class="tab" data-role="detective" role="tab"><span class="tab-tag">Lighthouse</span><span class="tab-name">Detective</span></button>
-        <button class="tab" data-role="realestate" role="tab"><span class="tab-tag">Local svc</span><span class="tab-name">Real Estate</span></button>
-        <button class="tab" data-role="taxprep" role="tab"><span class="tab-tag">Solo pro</span><span class="tab-name">Tax Preparer</span></button>
-        <button class="tab" data-role="illustrator" role="tab"><span class="tab-tag">Creator</span><span class="tab-name">Illustrator</span></button>
-        <button class="tab" data-role="nurse" role="tab"><span class="tab-tag">Care</span><span class="tab-name">Nurse Practitioner</span></button>
-        <button class="tab" data-role="byor" role="tab"><span class="tab-tag">BYO</span><span class="tab-name">Your Role</span></button>
+        <button class="tab active" data-portal="detective" onclick="switchTab('detective')"><span>Detective Sample</span></button>
+        <button class="tab" data-portal="taxprep" onclick="switchTab('taxprep')"><span>Tax Preparer Sample</span></button>
+        <button class="tab" data-portal="academy" onclick="switchTab('academy')"><span>Music Academy Sample</span></button>
+        <button class="tab" data-portal="solo" onclick="switchTab('solo')"><span>Solo Operator</span></button>
+        <button class="tab" data-portal="byor" onclick="switchTab('byor')"><span>Bring Your Own Project</span></button>
       </div>
 
-      <div class="tab-portal" data-portal="overview">
-        <div class="portal">
-          <p style="color:var(--ink-muted);font-size:1rem;margin-bottom:1.25rem;">Click any tab above to step into that job's Stew account. You'll see the dashboard, the workflow, the cards — exactly what someone in that job would look at every day.</p>
-          <p style="color:var(--ink-muted);font-size:0.95rem;">Every job gets the same solid foundation: <span class="pill pill-info">6 pillars</span> <span class="pill pill-info">5-tier team</span> <span class="pill pill-info">forensic seal-score</span> <span class="pill pill-info">your cloud · your AIs</span>. The words change to fit your job; the rules don't.</p>
-          <div class="portal-grid" style="margin-top:1.5rem;">
-            <div class="portal-cell"><h4>Your stuff stays yours</h4><p>Your files live in your cloud. Your AIs run on your keys. Stew keeps things organized; nothing sits with us.</p></div>
-            <div class="portal-cell"><h4>Every step is logged</h4><p>Every decision carries a trust score. Every action adds to a record that anyone you trust can check.</p></div>
-            <div class="portal-cell"><h4>Talk to get started</h4><p>Speak your job into a microphone. Stew builds your starter space — your pages, your sections, your setup — tuned to what you do.</p></div>
+      <div class="tab-portal" id="portal-detective">
+        <div class="role-tag">Sample · Investigative Project</div>
+        <h3>Detective Sample — case-arc with shifting confidence</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">A working detective project for a public cold case. Watch how leading theories shift as new evidence enters, and how Stew tracks the confidence in each theory over time.</p>
+
+        <div class="case-arc">
+          <div class="arc-step">
+            <div class="arc-when">Week 1</div>
+            <div class="arc-what"><strong>Theory A</strong> emerges: weather-related disappearance based on initial reports.</div>
+            <div class="arc-confidence">62%</div>
+          </div>
+          <div class="arc-step">
+            <div class="arc-when">Week 4</div>
+            <div class="arc-what"><strong>Theory B</strong> introduced: third-party involvement after new witness account surfaces.</div>
+            <div class="arc-confidence">48%</div>
+          </div>
+          <div class="arc-step">
+            <div class="arc-when">Week 9</div>
+            <div class="arc-what">Cell tower data enters. <strong>Theory A confidence drops</strong> as location becomes inconsistent.</div>
+            <div class="arc-confidence">31% / 67%</div>
+          </div>
+          <div class="arc-step">
+            <div class="arc-when">Week 14</div>
+            <div class="arc-what">Forensic re-examination corroborates Theory B. Lead investigator updates working hypothesis.</div>
+            <div class="arc-confidence">22% / 81%</div>
+          </div>
+        </div>
+
+        <div class="portal-grid">
+          <div class="portal-cell">
+            <h4>Confidence Score</h4>
+            <p>Every conclusion carries a confidence number you can see, calibrate, and challenge.</p>
+            <span class="confidence">81% confidence</span>
+          </div>
+          <div class="portal-cell">
+            <h4>Adversarial Audit</h4>
+            <p>Multiple AIs check each other's work before any conclusion is shown. You see the result; the friction stays in the back room.</p>
+            <span class="confidence medium">3 of 4 AIs agree</span>
+          </div>
+          <div class="portal-cell">
+            <h4>Whiteboard View</h4>
+            <p>Theories, evidence, persons-of-interest, and cell-tower data on one canvas. Click any tile to see its source.</p>
           </div>
         </div>
       </div>
 
-      <div class="tab-portal" data-portal="detective" hidden>
-        <div class="portal">
-          <button class="portal-back" onclick="setRole('overview')">← Back to roles</button>
-          <div class="role-tag">Lighthouse vertical · Forensic case nav</div>
-          <h3>The Detective</h3>
-          <p style="color:var(--ink-muted);">Cold-case investigators, defense attorneys, behavioral analysts, journalists working long-form forensic threads. Your Stew account becomes a Detective Whiteboard at investigator scale.</p>
-          <div class="portal-flow">
-            <span class="step">01 → New case file dropped into your evidence folder</span>
-            <span class="step">02 → Intake AI triages: which case, which case room, what's missing</span>
-            <span class="step">03 → Hypothesis ranking; contradictions surfaced; evidence cards confidence-scored</span>
-            <span class="step">04 → Quality gate verifies every cited source; no hallucinated facts</span>
-            <span class="step">05 → Daily brief lands in your inbox; you review the deltas</span>
-            <span class="step">06 → Audit-trail appended to the case ledger; rolling forensic seal updated</span>
+      <div class="tab-portal" id="portal-taxprep" hidden>
+        <div class="role-tag">Sample · Tax Preparation Project</div>
+        <h3>Tax Preparer Sample — clients, deadlines, quarterly estimates</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">A tax preparer's Stew during the busy season. Each client is a project. Stew tracks which return is in which stage, what's been received, what's still missing, and surfaces the work that needs attention today.</p>
+        <div class="portal-grid">
+          <div class="portal-cell">
+            <h4>Client Roster</h4>
+            <p>Every client, current stage of return, last touch, blocker if any.</p>
+            <span class="confidence">live</span>
           </div>
-          <div class="portal-grid">
-            <div class="portal-cell">
-              <h4>Case Map (six rooms)</h4>
-              <p><span class="pill pill-confirmed">Apartment</span><span class="pill pill-confirmed">Digital</span><span class="pill pill-active">Interview</span><span class="pill pill-pending">Autopsy</span><span class="pill pill-confirmed">Timeline</span><span class="pill pill-confirmed">Persons</span></p>
-            </div>
-            <div class="portal-cell"><h4>Active threads</h4><p>Hypothesis · Contradictions · Outstanding questions · Chain-of-custody check</p></div>
-            <div class="portal-cell"><h4>What you can see</h4><p>Every claim with its source. Every gap with its open question. Every audit pass with its reviewer.</p></div>
+          <div class="portal-cell">
+            <h4>Quarterly Estimate Helper</h4>
+            <p>Year-to-date income in; safe-harbor estimate out — with a clear confidence number and "what would raise it" guidance.</p>
+            <span class="confidence medium">60% confidence — connect bookkeeping to raise it</span>
           </div>
-          <div class="portal-links">
-            <a class="portal-link">Pilot view chassis</a>
-            <a class="portal-link">Forensic seal scoring</a>
-            <a class="portal-link">Confidence chips</a>
-            <a class="portal-link">Cross-platform adversarial audit</a>
-            <a class="portal-link">Public-domain cold case demos</a>
+          <div class="portal-cell">
+            <h4>Document Inbox</h4>
+            <p>W-2s, 1099s, receipts. Drag-drop in; Stew tags them and routes to the right client project.</p>
+          </div>
+          <div class="portal-cell">
+            <h4>Deadline Watch</h4>
+            <p>Quarterly estimated payments, extension cutoffs, e-filing windows. Surfaced before they bite.</p>
           </div>
         </div>
       </div>
 
-      <div class="tab-portal" data-portal="realestate" hidden>
-        <div class="portal">
-          <button class="portal-back" onclick="setRole('overview')">← Back to roles</button>
-          <div class="role-tag">Local services · Owner-operator</div>
-          <h3>The Real Estate Operator</h3>
-          <p style="color:var(--ink-muted);">Owner-operators with multiple properties — flagship venues, rentals, restoration projects. Each property gets its own space inside your Stew account. Books, photos, contracts, vendor relationships — never leave your storage.</p>
-          <div class="portal-flow">
-            <span class="step">01 → New property added; sub-space scaffolded automatically</span>
-            <span class="step">02 → Renovation case + Marketing case + Accounting case threaded under it</span>
-            <span class="step">03 → Vendor inquiries arrive; Voice-intake skill drafts on-brand replies</span>
-            <span class="step">04 → 30-day follow-up cadence fires automatically post-tour</span>
-            <span class="step">05 → Forensic report runs before any infrastructure change (tracking tags, ad campaigns)</span>
-            <span class="step">06 → Monthly P&L synthesized from your records, not from a vendor's database</span>
+      <div class="tab-portal" id="portal-academy" hidden>
+        <div class="role-tag">Sample · Music Educator Project</div>
+        <h3>Music Academy Sample — students, lessons, recitals</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">A music academy's Stew. Each student is a project, each parent a contact, each recital a calendar event with logistics. Billing, scheduling, and parent communication in one place.</p>
+        <div class="portal-grid">
+          <div class="portal-cell">
+            <h4>Student Files</h4>
+            <p>Lesson notes, progress tracking, recital readiness, family contacts.</p>
           </div>
-          <div class="portal-grid">
-            <div class="portal-cell"><h4>Per-property nesting</h4><p>Renovation timelines · Marketing campaigns · Vendor ledger · Compliance dates</p></div>
-            <div class="portal-cell"><h4>Departments</h4><p><span class="pill pill-confirmed">Real Estate</span><span class="pill pill-confirmed">Accounting</span><span class="pill pill-active">Marketing</span><span class="pill pill-pending">Operations</span></p></div>
-            <div class="portal-cell"><h4>Crash-risk awareness</h4><p>Risky changes (Google Tag Manager, ad rebuilds) gated behind forensic reports. The system warns before it breaks.</p></div>
+          <div class="portal-cell">
+            <h4>Schedule Engine</h4>
+            <p>Reschedules, cancellations, makeups — without spreadsheet headaches.</p>
+            <span class="confidence">live</span>
           </div>
-          <div class="portal-links">
-            <a class="portal-link">Sub-account pattern</a>
-            <a class="portal-link">Vendor ledger</a>
-            <a class="portal-link">Renovation timeline</a>
-            <a class="portal-link">Marketing audit</a>
-            <a class="portal-link">P&L from records</a>
+          <div class="portal-cell">
+            <h4>Parent Communications</h4>
+            <p>One template, many parents, your voice. Stew remembers what was sent and when.</p>
+          </div>
+          <div class="portal-cell">
+            <h4>Recital Logistics</h4>
+            <p>Programs, run-of-show, family arrival times, all in one shared view.</p>
           </div>
         </div>
       </div>
 
-      <div class="tab-portal" data-portal="taxprep" hidden>
-        <div class="portal">
-          <button class="portal-back" onclick="setRole('overview')">← Back to roles</button>
-          <div class="role-tag">Solo professional · Per-client tracking</div>
-          <h3>The Tax Preparer</h3>
-          <p style="color:var(--ink-muted);">Independent CPAs, EAs, and seasonal tax preparers running their practice solo or with a small team. Every client is a case; every document is tracked; every deadline shows up before it bites.</p>
-          <div class="portal-flow">
-            <span class="step">01 → Client intake form arrives via email or upload</span>
-            <span class="step">02 → Documents auto-filed into the client's folder, tagged by year + form type</span>
-            <span class="step">03 → Status tracker updates: Waiting · Have docs · Drafting · Awaiting client signature · E-filed</span>
-            <span class="step">04 → Compliance-CE deadlines surface in the dashboard before they bite</span>
-            <span class="step">05 → Per-client billing pages render from the same source-of-truth records</span>
-            <span class="step">06 → End-of-season audit pass: every return cross-checked against last year's adjustments</span>
+      <div class="tab-portal" id="portal-solo" hidden>
+        <div class="role-tag">Sample · Solo Operator Project</div>
+        <h3>Solo Operator — back-office of a company you don't have to hire</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">Whether you're a contractor, a freelance designer, an independent consultant, or a single-member LLC — Stew is the back-office of a company you don't have to hire. Customer notes, invoicing, contracts, scheduling, follow-ups.</p>
+        <div class="portal-grid">
+          <div class="portal-cell">
+            <h4>Customer Pipeline</h4>
+            <p>Lead in. Quote out. Invoice tracked. Follow-up timed. Nothing forgotten.</p>
           </div>
-          <div class="portal-grid">
-            <div class="portal-cell"><h4>Per-client tracker</h4><p><span class="pill pill-confirmed">Have docs</span><span class="pill pill-active">Drafting</span><span class="pill pill-pending">Awaiting signature</span><span class="pill pill-info">E-filed</span></p></div>
-            <div class="portal-cell"><h4>Departments</h4><p>Intake · Doc collection · Status tracking · Billing · E-file · Compliance/CE</p></div>
-            <div class="portal-cell"><h4>The lightweight tracker</h4><p>The form your client sees is a window into the same records you operate on. One source-of-truth, two interfaces.</p></div>
+          <div class="portal-cell">
+            <h4>Project Estimates</h4>
+            <p>Past jobs become next quote's foundation. Confidence on each line item.</p>
+            <span class="confidence medium">75% confidence</span>
           </div>
-          <div class="portal-links">
-            <a class="portal-link">Client tracker</a>
-            <a class="portal-link">Doc collection</a>
-            <a class="portal-link">E-file gate</a>
-            <a class="portal-link">CE deadlines</a>
-            <a class="portal-link">Per-record zoom</a>
+          <div class="portal-cell">
+            <h4>Tax Box</h4>
+            <p>Receipts, mileage, deductible expenses tagged as you go — not the night before tax day.</p>
+          </div>
+          <div class="portal-cell">
+            <h4>Repeat-Customer Notes</h4>
+            <p>Stew remembers what they ordered, what they liked, what they hated. Your repeat business gets the white-glove treatment.</p>
           </div>
         </div>
       </div>
 
-      <div class="tab-portal" data-portal="illustrator" hidden>
-        <div class="portal">
-          <button class="portal-back" onclick="setRole('overview')">← Back to roles</button>
-          <div class="role-tag">Independent creator · Project & asset versioning</div>
-          <h3>The Illustrator</h3>
-          <p style="color:var(--ink-muted);">Freelance illustrators, designers, and visual creators juggling multiple clients and project rounds. Every project a case; every asset version tracked; every revision a verifiable history.</p>
-          <div class="portal-flow">
-            <span class="step">01 → New project brief arrives; client folder scaffolded with intake template</span>
-            <span class="step">02 → Asset versions captured with version-tuple naming (v01.00, v01.01, etc.)</span>
-            <span class="step">03 → Each revision round logged with timestamp + reviewer + decision</span>
-            <span class="step">04 → Royalty/licensing splits computed from the same project records</span>
-            <span class="step">05 → Quality gate checks deliverable formats, color profile, file naming</span>
-            <span class="step">06 → Project archive: client gets an audit-grade history of every decision made</span>
-          </div>
-          <div class="portal-grid">
-            <div class="portal-cell"><h4>Asset versioning</h4><p>Every file stamps a version number. Round-N approvals are auditable. No "which file did we send?" forever.</p></div>
-            <div class="portal-cell"><h4>Departments</h4><p>Project intake · Asset library · Client comms · Royalty/licensing · Archive</p></div>
-            <div class="portal-cell"><h4>Per-asset interface</h4><p>Each asset has its own page: thumbnail, version tree, reviews, related cards. Click anything to step into it.</p></div>
-          </div>
-          <div class="portal-links">
-            <a class="portal-link">Asset library</a>
-            <a class="portal-link">Version-tuple naming</a>
-            <a class="portal-link">Round-N gate</a>
-            <a class="portal-link">Royalty splits</a>
-            <a class="portal-link">Client archive</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-portal" data-portal="nurse" hidden>
-        <div class="portal">
-          <button class="portal-back" onclick="setRole('overview')">← Back to roles</button>
-          <div class="role-tag">Care provider · Privacy-by-default</div>
-          <h3>The Nurse Practitioner</h3>
-          <p style="color:var(--ink-muted);">Solo and small-practice clinicians running case management, follow-up cadences, and clinical-note synthesis. <strong>Privacy by default:</strong> patient data never leaves your space without explicit, audited permission.</p>
-          <div class="portal-flow">
-            <span class="step">01 → Patient case opened with sensitivity flag set to PII-HIGH automatically</span>
-            <span class="step">02 → Clinical notes drafted from your audio dictations (your microphone, your storage)</span>
-            <span class="step">03 → Follow-up cadence (7-day / 30-day / 90-day) auto-scheduled per protocol</span>
-            <span class="step">04 → Quality gate verifies medication dosages, allergy flags, billing codes</span>
-            <span class="step">05 → External communications (patient portal messages, referrals) drafted on-brand</span>
-            <span class="step">06 → Audit trail satisfies HIPAA-equivalent record-keeping for your practice</span>
-          </div>
-          <div class="portal-grid">
-            <div class="portal-cell"><h4>Default: nothing leaves</h4><p>Patient data has the highest sensitivity tag. Nothing exits without a credentialed export action.</p></div>
-            <div class="portal-cell"><h4>Departments</h4><p>Intake · Clinical notes · Follow-up · Billing · Compliance · External comms</p></div>
-            <div class="portal-cell"><h4>What stays private</h4><p>The records. The dictations. The clinical reasoning. The system orchestrates without ever accumulating.</p></div>
-          </div>
-          <div class="portal-links">
-            <a class="portal-link">Privacy-by-default</a>
-            <a class="portal-link">Sensitivity flagging</a>
-            <a class="portal-link">Follow-up cadence</a>
-            <a class="portal-link">Quality gate</a>
-            <a class="portal-link">HIPAA-equivalent records</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-portal" data-portal="byor" hidden>
-        <div class="portal">
-          <button class="portal-back" onclick="setRole('overview')">← Back to roles</button>
-          <div class="role-tag">Bring Your Own Role</div>
-          <h3>Your Role</h3>
-          <p style="color:var(--ink-muted);">Speak your job into the microphone. Stew builds your starter space — your sections, your setup, your pages — tuned to your work, your storage, your AIs.</p>
-          <div class="portal-flow">
-            <span class="step">01 → 5-minute voice chat: tell us what you do, who pays you, what slows you down</span>
-            <span class="step">02 → Starter space built; sections, sample cases, and pages — all tailored to your job</span>
-            <span class="step">03 → You connect your cloud storage (scoped to a single folder)</span>
-            <span class="step">04 → You connect the AIs you use (Claude, GPT, Gemini, or others)</span>
-            <span class="step">05 → First inquiry / case / project flows through within 24 hours</span>
-            <span class="step">06 → Your Stew account grows with every session; proven patterns trickle in from the shared template</span>
-          </div>
-          <div class="portal-grid">
-            <div class="portal-cell"><h4>Talk to get started</h4><p>5 minutes of conversation builds your starter space and setup.</p></div>
-            <div class="portal-cell"><h4>Bring everything you use</h4><p><span class="pill pill-info">Your Cloud</span><span class="pill pill-info">Your AIs</span><span class="pill pill-info">Your Domain</span></p></div>
-            <div class="portal-cell"><h4>Gets smarter over time</h4><p>Patterns that work in other accounts flow back into the shared template. Your account gets better without sharing your data.</p></div>
-          </div>
-          <div class="portal-links">
-            <a class="portal-link">Voice setup chat</a>
-            <a class="portal-link">Connect your cloud</a>
-            <a class="portal-link">Connect your AIs</a>
-            <a class="portal-link">Starter setup</a>
-            <a class="portal-link">Sub-account scaffold</a>
-          </div>
+      <div class="tab-portal" id="portal-byor" hidden>
+        <div class="role-tag">Sample · Bring Your Own Project</div>
+        <h3>Tell Stew what you want to organize</h3>
+        <p style="color:var(--ink-muted);margin-top:0.5rem">Don't see your project type? Stew is built to wrap around any of them. Tell Stew about a real thing you're trying to organize — household, hobby, side hustle, professional practice — and Stew will scaffold the project around your actual work.</p>
+        <div style="margin-top:1.5rem">
+          <button class="btn btn-primary" onclick="openJoin()">Tell Stew about your project</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="arch">
+<!-- ========================================================================
+     §B.7 — 6 PILLARS (interactive, click-to-expand)
+     Anonymity 4-test: PASS
+     ======================================================================== -->
+<section id="how">
   <div class="wrap">
-    <div class="section-tag">Six pillars · The bones</div>
-    <h2>What makes Stew <em>work</em>, under the hood.</h2>
-    <p class="lede">Every Stew account is built on the same six load-bearing pillars. Strip any one, the whole thing collapses.</p>
+    <div class="section-tag">How Stew Works</div>
+    <h2>Six load-bearing <em>pillars</em>.</h2>
+    <p class="lede">Every Stew is built on the same six pillars. Click any pillar to see a real example of it in action.</p>
+
     <div class="pillars">
-      <div class="pillar"><div class="icon">⌬</div><div class="name">Hierarchy</div><div class="blurb">Org & entity structure. Who reports to whom. Which entity owns what.</div></div>
-      <div class="pillar"><div class="icon">↬</div><div class="name">Flow</div><div class="blurb">Role cascade & handoff path. How work travels from intake to delivery.</div></div>
-      <div class="pillar"><div class="icon">⌖</div><div class="name">Timeline</div><div class="blurb">Build history. What was added when, and why. Decisions trace forward.</div></div>
-      <div class="pillar"><div class="icon">⎙</div><div class="name">Documents</div><div class="blurb">SOP taxonomy. Charters, blueprints, drafts, audits — every type has a home.</div></div>
-      <div class="pillar"><div class="icon">⏚</div><div class="name">Infrastructure</div><div class="blurb">Tools wired together. Cloud, ads, tracking, design, email — one connected map.</div></div>
-      <div class="pillar"><div class="icon">↻</div><div class="name">Lifecycle</div><div class="blurb">Session start to session end. Read memory, claim role, do work, save state.</div></div>
-    </div>
-
-    <h2 style="margin-top:5rem;">Three layers, one source of truth.</h2>
-    <div class="diagram-frame">
-      <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-layer architecture pyramid">
-        <style>.tlbl{font:600 14px 'Inter',sans-serif;fill:#e9e4d4}.tsub{font:11px 'JetBrains Mono',monospace;fill:#a89f88;letter-spacing:0.05em}.tdesc{font:11px 'Inter',sans-serif;fill:#a89f88}.tbox{fill:#1f1c16;stroke:#2a2620}.tbox-auth{fill:#2a2620;stroke:#c9a86a;stroke-width:1.5}.tarrow{stroke:#75705f;fill:none;marker-end:url(#tarrowhead)}</style>
-        <defs><marker id="tarrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M 0 0 L 8 5 L 0 10 Z" fill="#75705f"/></marker></defs>
-        <!-- Layer 1 (foundation) -->
-        <rect x="50" y="220" width="620" height="68" rx="4" class="tbox-auth"/>
-        <text x="360" y="245" text-anchor="middle" class="tlbl">Layer 1 · Markdown source-of-truth</text>
-        <text x="360" y="263" text-anchor="middle" class="tsub">AUTHORITATIVE</text>
-        <text x="360" y="278" text-anchor="middle" class="tdesc">Plain text. Human-readable. Lives in your cloud. If everything else burns, your work is still here.</text>
-        <!-- Layer 2 (graph) -->
-        <rect x="120" y="120" width="220" height="68" rx="4" class="tbox"/>
-        <text x="230" y="145" text-anchor="middle" class="tlbl">Layer 2 · Graph (JSON)</text>
-        <text x="230" y="163" text-anchor="middle" class="tsub">DERIVED FROM L1</text>
-        <text x="230" y="178" text-anchor="middle" class="tdesc">AI travel topology · 2-hop reach</text>
-        <!-- Layer 3 (interface) -->
-        <rect x="380" y="120" width="220" height="68" rx="4" class="tbox"/>
-        <text x="490" y="145" text-anchor="middle" class="tlbl">Layer 3 · Interface (HTML)</text>
-        <text x="490" y="163" text-anchor="middle" class="tsub">DERIVED FROM L1</text>
-        <text x="490" y="178" text-anchor="middle" class="tdesc">Dashboards · faces · pilot views</text>
-        <!-- Top humans/AI -->
-        <rect x="120" y="20" width="220" height="60" rx="4" class="tbox"/>
-        <text x="230" y="45" text-anchor="middle" class="tlbl">AI</text>
-        <text x="230" y="63" text-anchor="middle" class="tdesc">reads JSON · navigates by warping</text>
-        <rect x="380" y="20" width="220" height="60" rx="4" class="tbox"/>
-        <text x="490" y="45" text-anchor="middle" class="tlbl">Humans</text>
-        <text x="490" y="63" text-anchor="middle" class="tdesc">read HTML · click anything to step in</text>
-        <!-- arrows L1 → L2, L1 → L3 -->
-        <path d="M 230 220 L 230 188" class="tarrow"/>
-        <path d="M 490 220 L 490 188" class="tarrow"/>
-        <!-- arrows L2 → AI, L3 → Humans -->
-        <path d="M 230 120 L 230 80" class="tarrow"/>
-        <path d="M 490 120 L 490 80" class="tarrow"/>
-      </svg>
+      <div class="pillar" onclick="this.classList.toggle('expanded')">
+        <div class="icon">§</div>
+        <div class="name">Source of Truth</div>
+        <p class="blurb">One authoritative version of every fact in your Stew. No conflicting copies.</p>
+        <div class="example">When a client's address changes, it changes once. Every project that referenced it updates automatically.</div>
+        <div class="more">click to expand</div>
+      </div>
+      <div class="pillar" onclick="this.classList.toggle('expanded')">
+        <div class="icon">↹</div>
+        <div class="name">Linked Everything</div>
+        <p class="blurb">Every fact knows what it depends on. Tap any conclusion to walk back to its evidence.</p>
+        <div class="example">Click a tax estimate. See the income figures it used. Click those. See the bank deposits behind them. Click those. See the invoices.</div>
+        <div class="more">click to expand</div>
+      </div>
+      <div class="pillar" onclick="this.classList.toggle('expanded')">
+        <div class="icon">⌖</div>
+        <div class="name">Confidence Score</div>
+        <p class="blurb">Every conclusion carries a quality grade. You always know how much weight to give it.</p>
+        <div class="example">A "$4,200 quarterly estimate · 60% confidence · raise it by connecting bookkeeping" is more useful than a confident-sounding wrong number.</div>
+        <div class="more">click to expand</div>
+      </div>
+      <div class="pillar" onclick="this.classList.toggle('expanded')">
+        <div class="icon">⚖</div>
+        <div class="name">Adversarial Audit</div>
+        <p class="blurb">Multiple AIs check each other's work. The one that's right wins.</p>
+        <div class="example">A draft response goes to one AI for the answer, another for a critique, a third for a sanity check. You see the result; the disagreement stays in the back room.</div>
+        <div class="more">click to expand</div>
+      </div>
+      <div class="pillar" onclick="this.classList.toggle('expanded')">
+        <div class="icon">⌂</div>
+        <div class="name">You Are The Author</div>
+        <p class="blurb">No matter how much Stew helps, your name is on every decision. By design, not by promise.</p>
+        <div class="example">When you accept a draft, the audit trail records that you approved it — not that "the AI sent it." That difference matters when an auditor or attorney asks.</div>
+        <div class="more">click to expand</div>
+      </div>
+      <div class="pillar" onclick="this.classList.toggle('expanded')">
+        <div class="icon">⊕</div>
+        <div class="name">Auditable Trail</div>
+        <p class="blurb">Every decision is traceable to who made it, when, and why.</p>
+        <div class="example">Months later, you can ask Stew "why did we send this contract on March 14?" and see the chain — the email that triggered it, the draft you approved, the client signature.</div>
+        <div class="more">click to expand</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="team">
+<!-- ========================================================================
+     §B.8 — 3 LAYERS (benefit-language reframe per CES §A.3)
+     Anonymity 4-test: PASS
+       - Implementation names (MD/JSON/HTML) NEVER appear
+       - Reframed in user-benefit language only
+     ======================================================================== -->
+<section id="layers-section">
   <div class="wrap">
-    <div class="section-tag">Five tiers · The chain</div>
-    <h2>Five roles, one chain. Everything passes through the gate.</h2>
-    <p class="lede">Every task — from "send this venue reply" to "audit our advertising infrastructure" — flows through the same chain. Light AI for triage. Heavy AI for strategy. A quality gate before anything reaches the human. The roles map cleanly across whatever AI you bring.</p>
+    <div class="section-tag">Three Layers</div>
+    <h2>Three layers of your Stew. <em>You</em> see the third.</h2>
+    <p class="lede">Under the hood, Stew runs on a clean three-layer architecture. You only ever see the top layer — the view. The other two do their work quietly.</p>
 
-    <div class="diagram-frame">
-      <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Role cascade swim-lane diagram">
-        <style>.rlbl{font:600 13px 'Inter',sans-serif;fill:#e9e4d4}.rsub{font:10px 'JetBrains Mono',monospace;fill:#a89f88;letter-spacing:0.05em}.rdesc{font:10px 'Inter',sans-serif;fill:#a89f88}.rbox{fill:#1f1c16;stroke:#2a2620;rx:4}.rgate{fill:#2a2620;stroke:#a64b2a;stroke-width:1.5;rx:4}.rarrow{stroke:#c9a86a;stroke-width:1.5;fill:none;marker-end:url(#rarrowhead)}.rfail{stroke:#a64b2a;stroke-width:1.5;fill:none;stroke-dasharray:4,3;marker-end:url(#rfailhead)}.rdone{stroke:#4a6b4d;stroke-width:1.5;fill:none;stroke-dasharray:5,3;marker-end:url(#rdonehead)}</style>
+    <div class="layers">
+      <div class="layer">
+        <div class="layer-num">1</div>
+        <div class="layer-name">Your living source of truth.</div>
+        <p class="layer-blurb">Every fact in your Stew traces back here. Slow-changing. Trusted. Never duplicated.</p>
+      </div>
+      <div class="layer">
+        <div class="layer-num">2</div>
+        <div class="layer-name">How AI travels through your stew.</div>
+        <p class="layer-blurb">A map of how everything connects. Stew uses it to find what it needs without searching everywhere.</p>
+      </div>
+      <div class="layer">
+        <div class="layer-num">3</div>
+        <div class="layer-name">How you see it all.</div>
+        <p class="layer-blurb">Dashboards, lists, timelines, search — the part of Stew you actually look at.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     §B.10 — ROUTING VISUALIZATION
+     Anonymity 4-test: PASS
+       - Public vocab only (Intake/Master/Senior/Junior/Quality)
+       - Internal acronyms (ITC/MRC/SRC/JRC/QAC) NEVER appear
+       - Routing decisions made VISIBLE
+     ======================================================================== -->
+<section id="routing">
+  <div class="wrap">
+    <div class="section-tag">Multi-AI Council Room</div>
+    <h2>Stew talks to <em>all</em> your AIs at once. Picks the best one for each question.</h2>
+    <p class="lede">Most AI tools give you one model. Stew uses a council. For every task, Stew routes to the AI best suited for it — at the price tier you're paying. The routing intelligence is the moat.</p>
+
+    <div class="routing-frame">
+      <svg viewBox="0 0 800 360" role="img" aria-label="Routing diagram showing how Stew dispatches a project across multiple AI tiers">
         <defs>
-          <marker id="rarrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M 0 0 L 7 4 L 0 8 Z" fill="#c9a86a"/></marker>
-          <marker id="rfailhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M 0 0 L 7 4 L 0 8 Z" fill="#a64b2a"/></marker>
-          <marker id="rdonehead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M 0 0 L 7 4 L 0 8 Z" fill="#4a6b4d"/></marker>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <polygon points="0 0, 8 4, 0 8" fill="#c9a86a"/>
+          </marker>
         </defs>
-        <!-- Lane labels (left) -->
-        <text x="10" y="40" class="rsub">YOU</text>
-        <text x="10" y="95" class="rsub">INTAKE</text>
-        <text x="10" y="150" class="rsub">MASTER</text>
-        <text x="10" y="205" class="rsub">SENIOR</text>
-        <text x="10" y="245" class="rsub">QA GATE</text>
-        <text x="10" y="295" class="rsub">JUNIOR</text>
-        <!-- Boxes -->
-        <rect x="80" y="22" width="120" height="36" class="rbox"/><text x="140" y="40" text-anchor="middle" class="rlbl">Request</text><text x="140" y="53" text-anchor="middle" class="rdesc">"reply to bride"</text>
-        <rect x="220" y="78" width="120" height="34" class="rbox"/><text x="280" y="98" text-anchor="middle" class="rlbl">Triage + brief</text>
-        <rect x="360" y="133" width="130" height="34" class="rbox"/><text x="425" y="152" text-anchor="middle" class="rlbl">Plan + criteria</text>
-        <rect x="510" y="188" width="120" height="34" class="rbox"/><text x="570" y="208" text-anchor="middle" class="rlbl">Execute draft</text>
-        <rect x="510" y="232" width="120" height="34" class="rgate"/><text x="570" y="252" text-anchor="middle" class="rlbl">Quality check</text>
-        <rect x="370" y="280" width="120" height="34" class="rbox"/><text x="430" y="300" text-anchor="middle" class="rlbl">File + ledger</text>
-        <rect x="220" y="280" width="120" height="34" class="rbox"/><text x="280" y="300" text-anchor="middle" class="rlbl">Deliver to you</text>
-        <!-- Arrows down/right -->
-        <path d="M 200 40 L 220 95" class="rarrow"/>
-        <path d="M 340 95 L 360 150" class="rarrow"/>
-        <path d="M 490 150 L 510 205" class="rarrow"/>
-        <path d="M 570 222 L 570 232" class="rarrow"/>
-        <!-- pass arrow from QA to Junior -->
-        <path d="M 510 249 L 490 297" class="rarrow"/>
-        <!-- Junior to deliver -->
-        <path d="M 370 297 L 340 297" class="rarrow"/>
-        <!-- deliver back up to YOU -->
-        <path d="M 280 280 L 280 60" class="rdone"/>
-        <!-- FAIL loop QA -> Senior -->
-        <path d="M 510 244 L 480 244 L 480 200 L 510 200" class="rfail"/>
-        <text x="475" y="215" class="rsub" style="fill:#a64b2a">fail</text>
+
+        <!-- INTAKE -->
+        <rect x="40" y="150" width="120" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="100" y="180" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Intake</text>
+        <text x="100" y="200" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">cheapest tier</text>
+
+        <!-- MASTER -->
+        <rect x="220" y="80" width="130" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="285" y="110" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Master</text>
+        <text x="285" y="130" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">strategic reasoning</text>
+
+        <!-- SENIOR (multiple) -->
+        <rect x="220" y="220" width="130" height="60" rx="4" fill="#1f1c16" stroke="#c9a86a" stroke-width="1.5"/>
+        <text x="285" y="250" text-anchor="middle" fill="#d8b97a" font-family="Cormorant Garamond" font-size="16">Senior × N</text>
+        <text x="285" y="270" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">domain experts</text>
+
+        <!-- JUNIOR (parallel) -->
+        <rect x="410" y="40" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
+        <text x="475" y="68" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #1</text>
+
+        <rect x="410" y="100" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
+        <text x="475" y="128" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #2</text>
+
+        <rect x="410" y="180" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
+        <text x="475" y="208" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #3</text>
+
+        <rect x="410" y="260" width="130" height="50" rx="4" fill="#1f1c16" stroke="#5e7a99" stroke-width="1.5"/>
+        <text x="475" y="288" text-anchor="middle" fill="#9eb2c9" font-family="JetBrains Mono" font-size="11">Junior #4 (parallel)</text>
+
+        <!-- QUALITY -->
+        <rect x="600" y="150" width="130" height="60" rx="4" fill="#1f1c16" stroke="#a64b2a" stroke-width="1.5"/>
+        <text x="665" y="180" text-anchor="middle" fill="#d68c6e" font-family="Cormorant Garamond" font-size="16">Quality</text>
+        <text x="665" y="200" text-anchor="middle" fill="#a89f88" font-family="JetBrains Mono" font-size="10">adversarial audit</text>
+
+        <!-- ARROWS -->
+        <line x1="160" y1="180" x2="220" y2="120" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="160" y1="180" x2="220" y2="240" stroke="#c9a86a" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="350" y1="120" x2="410" y2="65" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
+        <line x1="350" y1="120" x2="410" y2="125" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
+        <line x1="350" y1="240" x2="410" y2="205" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
+        <line x1="350" y1="240" x2="410" y2="285" stroke="#c9a86a" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
+        <line x1="540" y1="65" x2="600" y2="160" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
+        <line x1="540" y1="125" x2="600" y2="170" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
+        <line x1="540" y1="205" x2="600" y2="190" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
+        <line x1="540" y1="285" x2="600" y2="200" stroke="#a64b2a" stroke-width="1" marker-end="url(#arrow)"/>
       </svg>
     </div>
 
-    <div class="portal-grid" style="margin-top:2rem;">
-      <div class="portal-cell"><h4>Intake</h4><p>The front door. Triages: what is this, what does it need, who handles it. Drafts a session brief.</p></div>
-      <div class="portal-cell"><h4>Master</h4><p>Senior strategist. Reads memory, claims the role, builds the plan. Reserved for decisions that matter.</p></div>
-      <div class="portal-cell"><h4>Senior</h4><p>Executor. Builds the draft, runs the audit, fixes infrastructure. The heavy lifting.</p></div>
-      <div class="portal-cell"><h4>Quality</h4><p>The gate. Grammar, accuracy, tone, link integrity, PII scan. Fails route back; only clean work ships.</p></div>
-      <div class="portal-cell"><h4>Junior</h4><p>The filer. Files to the right folder, appends session state, presents the deliverable to the human.</p></div>
+    <div class="routing-note">
+      <strong>What you're seeing:</strong> a single project routed across the council.
+      <strong>Junior #1</strong> went to a fast, cheap model (free-tier-default) because the task was simple summarization.
+      <strong>Junior #2</strong> went to a deep-reasoning model because it required structured legal analysis.
+      <strong>Junior #3</strong> went to a different provider entirely because that provider is best at this category right now.
+      <strong>Quality</strong> compared all four results adversarially before any answer reached you.
+      <br><br>
+      <strong>Free tier:</strong> the council uses bundled fast models. <strong>Paid tiers:</strong> the council uses your connected AIs (bring your own keys) and routes to the strongest one for each task class — never the most expensive by default.
     </div>
   </div>
 </section>
 
-<section id="journey">
+<!-- ========================================================================
+     §B.18 — SOLO ENTREPRENEUR / CONTRACTOR TARGETING
+     Anonymity 4-test: PASS
+     ======================================================================== -->
+<section id="solo-section">
   <div class="wrap">
-    <div class="section-tag">Journey · How we got here</div>
-    <h2>Two years of nights, contractor disasters, and refusing to quit.</h2>
-    <p class="lede">Stew was not assembled in a sprint. It was iterated through hundreds of sessions, debugged through real failures, and refined under real production load. Below is the spine of that build.</p>
+    <div class="section-tag">Solo Operators</div>
+    <h2>Solo? Contractor? Single-member LLC?</h2>
+    <p class="lede">Stew gives you the back-office of a company you don't have to hire.</p>
 
-    <div class="timeline">
-      <div class="tl-item right milestone"><div class="tl-date">JUN 2024</div><div class="tl-event">Holding company formed</div><div class="tl-detail">26 Cents LLC. Foundational, not flashy. The legal structure under everything that follows.</div></div>
-      <div class="tl-item left"><div class="tl-date">AUG 2025</div><div class="tl-event">First property under restoration</div><div class="tl-detail">A historic building on the literal main street of a small town. Saw it as a wedding venue, not a fixer-upper.</div></div>
-      <div class="tl-item right setback"><div class="tl-date">FALL 2025</div><div class="tl-event">Contractor disaster — $40K lost</div><div class="tl-detail">Half the renovation budget went to a contractor who never delivered. Lessons carved in scar tissue.</div></div>
-      <div class="tl-item left"><div class="tl-date">JAN 2026</div><div class="tl-event">First AI session — chaos</div><div class="tl-detail">Hallucinated suggestions, broken tracking tags, advertising spent against ghost data. The system needed structure.</div></div>
-      <div class="tl-item right milestone"><div class="tl-date">FEB 2026</div><div class="tl-event">Role cascade designed</div><div class="tl-detail">Five tiers, one chain. Intake, Master, Senior, Quality, Junior. Nobody verifies their own work.</div></div>
-      <div class="tl-item left"><div class="tl-date">MAR 2026</div><div class="tl-event">Flagship venue launched</div><div class="tl-detail">First wedding inquiry processed end-to-end through the new system in 6 minutes. Before: 35 minutes.</div></div>
-      <div class="tl-item right milestone"><div class="tl-date">APR 2026</div><div class="tl-event">Three-layer architecture locked</div><div class="tl-detail">Markdown source-of-truth · JSON graph · HTML interface. AI travels by warping, humans click anything.</div></div>
-      <div class="tl-item left milestone"><div class="tl-date">MAY 2026</div><div class="tl-event">Public proof-of-concept live</div><div class="tl-detail">Forensic seal scoring on every claim. Voice-intake onboarding designed. Auto-improvement loop in flight. Anyone can run their own.</div></div>
+    <div class="solo-grid">
+      <div class="solo-tag">Construction contractor</div>
+      <div class="solo-tag">Freelance designer</div>
+      <div class="solo-tag">Real-estate agent</div>
+      <div class="solo-tag">Independent consultant</div>
+      <div class="solo-tag">Food truck owner</div>
+      <div class="solo-tag">Freelance writer</div>
+      <div class="solo-tag">Personal trainer</div>
+      <div class="solo-tag">Photographer</div>
+      <div class="solo-tag">Tax preparer</div>
+      <div class="solo-tag">Music educator</div>
+      <div class="solo-tag">Bookkeeper</div>
+      <div class="solo-tag">Anyone, really.</div>
     </div>
   </div>
 </section>
 
-<section id="story">
-  <div class="wrap" style="max-width:820px;">
-    <div class="section-tag">Why it exists · The Restoration Architecture</div>
-    <h2>Buildings, systems, and the discipline to rebuild both.</h2>
-    <p style="color:var(--ink-muted);font-size:1.05rem;">Stew did not start as a software project. It started as a working system one person built to keep a real venue running, real properties operating, and real customers heard — without hiring out roles he could not afford to fill. He restores buildings as a literal job. He built Stew so the systems behind those buildings could be restored too.</p>
-    <div class="quote-block">
-      "The buildings were broken. The systems were broken. All have been rebuilt from the foundation up. That is not a coincidence. That is architecture."
-      <span class="attribution">— from the build journal</span>
-    </div>
-    <p style="color:var(--ink-muted);font-size:1.05rem;">Stew is, at its core, a system of organized hope: that if you build the right structure, put the right guardrails in place, and refuse to cut corners even when you're exhausted — the work will hold. Now anyone with a real job and a real workload can run their own.</p>
-    <p style="color:var(--ink-dim);font-size:0.9rem;margin-top:2rem;">The team behind Stew is small. The architect is anonymous by choice. Communications go through the system; specialist AI nodes respond on the team's behalf. <em>Pure Heart Directive</em> · 100% Legal · 100% Ethical · Zero Greed.</p>
-  </div>
-</section>
-
-<section id="join" class="cta-section">
+<!-- ========================================================================
+     §B.4 — CLOUD STORAGE (dual-cloud, anonymity-preserving copy)
+     ANONYMITY 4-test: PASS — and this is the hardest writing problem per CES §D
+       - User experiences "your cloud" as ONE thing
+       - Cloud-1 (governance) NEVER mentioned by name
+       - Frame: user sovereignty over THEIR documents (Cloud-2 only)
+       - Free tier "just works" without exposing where bytes initially live
+     CES §A.1 ratification: hybrid two-cloud, governance-hidden
+     ======================================================================== -->
+<section id="cloud-section">
   <div class="wrap">
-    <h2>Be one of the first.</h2>
-    <p class="lede" style="margin-left:auto;margin-right:auto;">Proof of concept #1 is live. Friends and family next. Then a public Stew account anyone can run on their own AIs and storage. Leave an email and you'll hear when the first invites go out.</p>
-    <form class="cta-form" onsubmit="event.preventDefault();document.getElementById('cta-msg').textContent='Thanks — captured. We will reach out.';">
-      <input type="email" placeholder="you@example.com" required aria-label="Email address">
-      <button type="submit" class="btn btn-primary">Notify me</button>
-    </form>
-    <p class="cta-note" id="cta-msg">No spam. Single notification when invites open. Bring your own AI when you arrive.</p>
+    <div class="section-tag">Your Documents, Your Cloud</div>
+    <h2>Your documents stay <em>yours</em>.</h2>
+    <p class="lede">Stew is free to start — no cloud connection needed. When you're ready to organize your own documents — PDFs, photos, contracts, transcripts — connect the cloud you already use. Your files live in your cloud. Stew just talks to it.</p>
+
+    <div class="cloud-row">
+      <div class="cloud-provider"><span class="check">✓</span>Google Drive</div>
+      <div class="cloud-provider"><span class="check">✓</span>OneDrive</div>
+      <div class="cloud-provider"><span class="check">✓</span>Dropbox</div>
+      <div class="cloud-provider"><span class="check">✓</span>iCloud</div>
+      <div class="cloud-provider"><span class="check">✓</span>Box</div>
+    </div>
+
+    <p class="lede" style="margin-top:2rem">Disconnect any time. Swap providers without breaking your Stew. Your documents move; your Stew stays organized around them.</p>
   </div>
 </section>
 
+<!-- ========================================================================
+     §B.11 — PRICING (CES §A.4 ratified — published as-is)
+     Anonymity 4-test: PASS
+     ======================================================================== -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-tag">Pricing</div>
+    <h2>Pricing for <em>everyone</em>.</h2>
+    <p class="lede">Free tier is genuinely free — and substantively different from anything else free out there. Paid tiers unlock multi-AI council, sub-tenants, and audit-grade compliance.</p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="tier-tag">Always free</div>
+        <div class="tier-name">Free</div>
+        <div class="tier-price">$0<span class="per">/forever</span></div>
+        <ul>
+          <li>Bundled fast AI included</li>
+          <li>1 active project</li>
+          <li>Light cloud included</li>
+          <li>Community support</li>
+        </ul>
+        <button class="btn btn-ghost" onclick="openJoin()">Start free</button>
+      </div>
+
+      <div class="price-card">
+        <div class="tier-tag">For individuals</div>
+        <div class="tier-name">Personal</div>
+        <div class="tier-price">$19<span class="per">/month</span></div>
+        <ul>
+          <li>Bring your own AI keys</li>
+          <li>Unlimited projects</li>
+          <li>Connect your cloud</li>
+          <li>Email support</li>
+        </ul>
+        <button class="btn btn-ghost" onclick="openJoin()">Start Personal</button>
+      </div>
+
+      <div class="price-card featured">
+        <div class="tier-tag">For pros</div>
+        <div class="tier-name">Professional</div>
+        <div class="tier-price">$49<span class="per">/month</span></div>
+        <ul>
+          <li>Everything in Personal</li>
+          <li>Multi-AI Council Room</li>
+          <li>Jurisdiction awareness</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openJoin()">Go Pro</button>
+      </div>
+
+      <div class="price-card">
+        <div class="tier-tag">For practices</div>
+        <div class="tier-name">Practice</div>
+        <div class="tier-price">$149<span class="per">/month</span></div>
+        <ul>
+          <li>Everything in Professional</li>
+          <li>5 sub-tenant seats (clients/staff)</li>
+          <li>Company-mode templates</li>
+          <li>Audit log export</li>
+        </ul>
+        <button class="btn btn-ghost" onclick="openJoin()">Start Practice</button>
+      </div>
+
+      <div class="price-card">
+        <div class="tier-tag">For organizations</div>
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-price">Talk<span class="per"> to us</span></div>
+        <ul>
+          <li>Unlimited seats</li>
+          <li>White-label</li>
+          <li>Custom credential tiers</li>
+          <li>SLA</li>
+        </ul>
+        <button class="btn btn-ghost" onclick="openJoin()">Contact</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     §B.13 — WHY IT EXISTS (rewritten — universal, no biographical)
+     Anonymity 4-test: PASS
+       - All "1 person built it" struck
+       - Universal applicability frame from §E.10
+       - Founder-quote pattern: "from the founders" plural
+     ======================================================================== -->
+<section id="why">
+  <div class="wrap">
+    <div class="section-tag">Why Stew Exists</div>
+    <h2>To help <em>every single person</em> in the world.</h2>
+    <p class="lede">The world has tiny problems and massive ones. The same AI tools should be able to help with both — and they should belong to the person, not the platform. Stew exists because that wasn't true yet.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>The tiny problems matter.</h3>
+        <p>Where did I park the car? Did I send Aunt Carol a thank-you? What was the Wi-Fi password at the rental? Stew remembers the small things so you don't have to.</p>
+      </div>
+      <div class="why-card">
+        <h3>The massive problems are organizable.</h3>
+        <p>A multi-property real-estate portfolio, a regulated practice with hundreds of clients, a research project that spans years. The pattern is the same: organized projects, audited decisions, confidence scored.</p>
+      </div>
+      <div class="why-card">
+        <h3>The architecture should belong to you.</h3>
+        <p>Your documents stay in your cloud. Your AI keys stay yours. Your decisions stay yours by name. Stew is the helper. You are the author.</p>
+      </div>
+      <div class="why-card">
+        <h3>The principles are universal.</h3>
+        <p>Linked everything. Confidence on every conclusion. Adversarial audit. Auditable trail. These work whether you're managing a household or a Fortune-equivalent operation.</p>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p class="text">"100% Ethical-Legal-Care, 0% Greed-Hate."</p>
+      <p class="attrib">— From the charter</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     §B.14 — HARD CTA (replaces soft "be one of the first")
+     Anonymity 4-test: PASS
+     ======================================================================== -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Tell Stew. <em>Organize</em> anything.</h2>
+    <p class="lede">Free to start. Tell Stew what you want to organize. Stew handles the rest.</p>
+    <button class="btn btn-primary" onclick="openJoin()">Tell Stew Now</button>
+  </div>
+</section>
+
+<!-- ========================================================================
+     §B.15 / §B.20 — FOOTER
+     Anonymity 4-test: PASS
+       - "© 2026 WebICommand LLC" only
+       - No "architect anonymous by choice"
+       - No size language
+     ======================================================================== -->
 <footer>
   <div class="wrap">
-    <div class="col">
-      <h4>The architecture</h4>
-      <ul>
-        <li><a onclick="document.getElementById('arch').scrollIntoView({behavior:'smooth'})">Six pillars</a></li>
-        <li><a onclick="document.getElementById('arch').scrollIntoView({behavior:'smooth'})">Three layers</a></li>
-        <li><a onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Five roles</a></li>
-        <li><a onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Sample Stew accounts</a></li>
-        <li><a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">Build journey</a></li>
-      </ul>
-    </div>
-    <div class="col">
-      <h4>The roles</h4>
-      <ul>
-        <li><a onclick="setRole('detective')">Detective</a></li>
-        <li><a onclick="setRole('realestate')">Real Estate Operator</a></li>
-        <li><a onclick="setRole('taxprep')">Tax Preparer</a></li>
-        <li><a onclick="setRole('illustrator')">Illustrator</a></li>
-        <li><a onclick="setRole('nurse')">Nurse Practitioner</a></li>
-        <li><a onclick="setRole('byor')">Your Role (BYO)</a></li>
-      </ul>
-    </div>
-    <div class="col">
-      <h4>How it works</h4>
-      <ul>
-        <li>Markdown source-of-truth</li>
-        <li>JSON graph (AI travel)</li>
-        <li>HTML faces (human view)</li>
-        <li>BYO Cloud · OAuth-scoped</li>
-        <li>BYO AI · API-key-scoped</li>
-        <li>Voice-intake onboarding</li>
-      </ul>
-    </div>
-    <div class="col">
-      <h4>Posture</h4>
-      <ul>
-        <li>Sovereign by default</li>
-        <li>Privacy by default</li>
-        <li>Append-only history</li>
-        <li>Forensic seal scoring</li>
-        <li>Pure Heart Directive</li>
-      </ul>
-    </div>
-    <div class="legal">
-      <p>© 2026 Stew — built and maintained by a small team. The architect is anonymous by choice; communications go through the system. This is the public proof-of-concept; no account data appears here; the email form does not yet subscribe you to anything. Powered by WebICommand LLC. <em>Pure Heart Directive: 100% Legal, 100% Ethical, Zero Greed.</em></p>
-    </div>
+    <p class="tagline">Tell Stew. Organize anything.</p>
+    <p>Powered by WebICommand LLC.</p>
+    <p class="copyright">© 2026 WebICommand LLC. All rights reserved.</p>
   </div>
 </footer>
 
+<!-- ========================================================================
+     §B.17 — JOIN MODAL
+     Anonymity 4-test: PASS
+     Voice-intake bait field captures first project before signup
+     NOT wired to real list (per §E forbidden)
+     ======================================================================== -->
+<div class="modal-bg" id="join-modal" onclick="if(event.target.id==='join-modal') closeJoin()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeJoin()">×</button>
+    <h3>Tell Stew about you.</h3>
+    <p class="lede">Quick. Three fields. We'll save you a spot and reach out when Stew is ready for you.</p>
+
+    <form id="join-form" onsubmit="submitJoin(event)">
+      <label for="join-name">Your name</label>
+      <input id="join-name" type="text" autocomplete="name" required>
+
+      <label for="join-email">Your email</label>
+      <input id="join-email" type="email" autocomplete="email" required>
+
+      <label for="join-project">What do you want to organize? (1 sentence is fine)</label>
+      <textarea id="join-project" placeholder="e.g., my freelance design business, our family medical history, my real-estate portfolio..." required></textarea>
+
+      <button class="btn btn-primary" type="submit">Save my spot</button>
+    </form>
+
+    <div class="modal-success" id="join-success">
+      Got it — Stew will reach out when it's ready for you.
+    </div>
+  </div>
+</div>
+
 <script>
-function setRole(role){
-  document.querySelectorAll('.tab').forEach(t=>{const sel=t.dataset.role===role;t.classList.toggle('active',sel);t.setAttribute('aria-selected',sel?'true':'false');});
-  document.querySelectorAll('.tab-portal').forEach(p=>{p.hidden=p.dataset.portal!==role;});
-  // Scroll to portal section without jumping past the tab bar
-  const explore=document.getElementById('rolePortal');
-  if(explore){const r=explore.getBoundingClientRect();window.scrollTo({top:window.scrollY+r.top-90,behavior:'smooth'});}
+function scrollToId(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
 }
-function goHome(){window.scrollTo({top:0,behavior:'smooth'});setRole('overview');}
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setRole(t.dataset.role)));
+
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.portal === name));
+  document.querySelectorAll('.tab-portal').forEach(p => {
+    p.hidden = (p.id !== 'portal-' + name);
+  });
+}
+
+function openJoin(){
+  document.getElementById('join-modal').classList.add('open');
+  setTimeout(() => document.getElementById('join-name').focus(), 50);
+}
+function closeJoin(){
+  document.getElementById('join-modal').classList.remove('open');
+}
+function submitJoin(e){
+  e.preventDefault();
+  // NOTE: not wired to a real list per CES §E forbidden — that's Session 111.
+  // For now: confirm to user, log to console only.
+  const name = document.getElementById('join-name').value;
+  const email = document.getElementById('join-email').value;
+  const project = document.getElementById('join-project').value;
+  console.log('JOIN intake (placeholder — not yet wired):', {name, email, project});
+  document.getElementById('join-form').style.display = 'none';
+  document.getElementById('join-success').classList.add('show');
+  setTimeout(() => {
+    closeJoin();
+    document.getElementById('join-form').style.display = '';
+    document.getElementById('join-form').reset();
+    document.getElementById('join-success').classList.remove('show');
+  }, 3500);
+}
+
+// ESC closes modal
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeJoin();
+});
 </script>
 
 </body>
